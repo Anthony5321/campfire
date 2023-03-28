@@ -4,6 +4,10 @@ import { useState, useEffect } from 'react';
 import Client from './services/api';
 import LandingPage from './pages/landingPage/LandingPage';
 import Home from './pages/home/Home';
+import EditStory from './pages/editStory/EditStory';
+import AddStory from './pages/AddStory/AddStory';
+import UserDash from './pages/userDash/UserDash';
+import About from './pages/about/About';
 
 function App() {
 
@@ -34,7 +38,7 @@ function App() {
   }
 
   useEffect(() => {
-    getMeals()
+    getStories()
     const token = localStorage.getItem('token')
     if (token) {
       checkToken()
