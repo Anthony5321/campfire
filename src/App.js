@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Client from './services/api';
 import Landing from './pages/landing/Landing';
-// import Home from './pages/home/Home';
+import Home from './pages/home/Home';
 // import EditStory from './pages/editStory/EditStory';
 // import AddStory from './pages/addStory/AddStory';
 // import ReadBook from './pages/readBook/ReadBook';
@@ -52,7 +52,7 @@ function App() {
     <div className="App">
       <Routes className="Routes">
         <Route path='/' element={<Landing />} />
-        {/* <Route path='/home' element={<Home user={user} setUser={setUser} />} /> */}
+        <Route path='/home' element={<Home user={user} setUser={setUser} />} />
         {/* <Route path="/about" element={<About user={user} setUser={setUser} />} /> */}
         {/* <Route path="/stories/:id" element={
           <ReadBook story={story} getStories={getStories} user={user} setUser={setUser} />

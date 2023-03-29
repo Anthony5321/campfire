@@ -11,7 +11,7 @@ const LoginForm = ({ toggleForm, setUser }) => {
             const res = await Client.post('/users/login', data)
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('user_id', res.data.user.id)
-            navigate('/dashboard')
+            navigate('/home')
             return res.data
         } catch (error) {
             console.log(error);
@@ -36,7 +36,7 @@ const LoginForm = ({ toggleForm, setUser }) => {
         const payload = await loginUser(formValues)
         setFormValues(initialState)
         setUser(payload)
-        navigate('/dashboard')
+        navigate('/home')
         setFailedLogin(true)
     }
 
