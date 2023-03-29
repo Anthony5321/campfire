@@ -31,7 +31,7 @@ const Home = () => {
             <Nav />
             {story.map((card) => (
                 <Link to={`/stories/${card.id}`} key={card.id}>
-                    <BookCard title={card?.title} picture={card?.picture} authorId={card?.authorId} likes={card?.likes} />
+                    <BookCard title={card?.title} image={card?.image} authorId={card?.authorId} likes={card?.likes} />
                 </Link>
             ))}
         </div>

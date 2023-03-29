@@ -6,7 +6,7 @@ import Landing from './pages/landing/Landing';
 import Home from './pages/home/Home';
 // import EditStory from './pages/editStory/EditStory';
 // import AddStory from './pages/addStory/AddStory';
-// import ReadBook from './pages/readBook/ReadBook';
+import ReadBook from './pages/readBook/ReadBook';
 // import UserDash from './pages/userDash/UserDash';
 // import About from './pages/about/About';
 
@@ -54,9 +54,9 @@ function App() {
         <Route path='/' element={<Landing />} />
         <Route path='/home' element={<Home user={user} setUser={setUser} />} />
         {/* <Route path="/about" element={<About user={user} setUser={setUser} />} /> */}
-        {/* <Route path="/stories/:id" element={
+        <Route path="/stories/:id" element={
           <ReadBook story={story} getStories={getStories} user={user} setUser={setUser} />
-        } /> */}
+        } />
         {/* <Route path="/add/story" element={<AddStory user={user} getStories={getStories} setUser={setUser} />} /> */}
         {/* <Route path='/auth' element={<UserDash user={user} setUser={setUser} />}></Route> */}
         {/* <Route path='/edit' element={<EditStory user={user} setUser={setUser} />}></Route>  */}

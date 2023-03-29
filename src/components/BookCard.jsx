@@ -4,12 +4,13 @@ import Client from '../services/api'
 
 const BookCard = (props) => {
 
-  const author = props.createdby
+  const author = props.authorId
   const [userName, setUserName] = useState('')
 
   const GetUser = async (data) => {
     try {
       const res = await Client.get(`/users/get/${author}`, data)
+      console.log(res.data);
       setUserName(res.data.username)
     } catch (error) {
       throw error
@@ -29,9 +30,9 @@ const BookCard = (props) => {
       <div>
         <img src={props.image} alt="Book-image" />
       </div>
-      <div className="trendingFoodCardText">
+      <div>
         <h5>{props.title}</h5>
-        <p>By: {author}</p>
+        <p>By: {userName}</p>
       </div>
     </div>
   )
