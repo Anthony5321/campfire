@@ -33,6 +33,7 @@ const BookCard = (props) => {
       <div>
         <h5>{props.title}</h5>
         <p>By: {userName}</p>
+        <p>Rating: {props.likes}</p>
       </div>
     </div>
   )
