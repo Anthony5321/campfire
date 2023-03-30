@@ -5,6 +5,7 @@ import Client from './services/api';
 import Landing from './pages/landing/Landing';
 import Home from './pages/home/Home';
 import EditStory from './pages/editStory/EditStory';
+import EditSnippet from './pages/editSnippet/EditSnippet';
 import AddStory from './pages/addStory/AddStory';
 import ReadBook from './pages/readBook/ReadBook';
 // import UserDash from './pages/userDash/UserDash';
@@ -61,6 +62,7 @@ function App() {
         <Route path="/add/story" element={<AddStory user={user} getStories={getStories} setUser={setUser} />} />
         {/* <Route path='/auth' element={<UserDash user={user} setUser={setUser} />}></Route> */}
         <Route path='/edit' element={<EditStory user={user} setUser={setUser} />}></Route> 
+        <Route path='/stories/:storyId/add-snippet' element={<EditSnippet user={user} setUser={setUser} />}></Route> 
       </Routes>
     </div>
   );
