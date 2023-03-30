@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Client from '../../services/api';
 import { useNavigate } from 'react-router-dom';
-import Nav from '../../components/Nav';
 
 
 const Home = () => {
@@ -28,7 +27,6 @@ const Home = () => {
 
     return (
         <div className="home-ctn">
-            <Nav />
             {story.map((card) => (
                 <Link to={`/stories/${card.id}`} key={card.id}>
                     <BookCard title={card?.title} image={card?.image} authorId={card?.authorId} likes={card?.likes} />
