@@ -25,6 +25,7 @@ const Nav = ({ user, setUser }) => {
         className={state ? 'fas fa-times' : 'fas fa-bars'}></i>
         <Link to={"/home"} className="backLink"><p>Home</p></Link>
         <Link to={"/add/story"}><p>Create A Story</p></Link>
+        <Link to={"/edit"}><p>Edit Your Story</p></Link>
     </div>
     </nav>
   )

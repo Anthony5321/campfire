@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './ReadBook.css';
-import Nav from '../../components/Nav';
 import { Link } from 'react-router-dom';
 import Client from '../../services/api';
 
@@ -94,7 +93,6 @@ const ReadBook = () => {
 
   return (
     <div>
-      <Nav />
       {snippet && (
         <>
           <img src={snippet.image} alt="image" />
