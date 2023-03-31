@@ -120,7 +120,7 @@ const EditSnippet = ({ story }) => {
                         </label>
                         <br />
                         <label>
-                            ParentId:
+                            Parent:
                             <select onChange={(e) => setparentSnippetId(e.target.value)}>
                                 {snippets.map((snippet) => (
                                     <option value={snippet.id} >

@@ -4,166 +4,160 @@ import Client from '../../services/api';
 import { Link } from 'react-router-dom';
 
 const AddStory = () => {
-    const [story, setStory] = useState({});
-    const [snippet, setSnippet] = useState({});
-    const [user, setUser] = useState({});
-    const [snippets, setSnippets] = useState([]);
-    const initialState = {
-        header: '',
-        content: '',
-        image: '',
-        parentId: ''
+  const [story, setStory] = useState({});
+  const [snippet, setSnippet] = useState({});
+  const [user, setUser] = useState({});
+  const [snippets, setSnippets] = useState([]);
+  const [parentSnippets, setParentSnippets] = useState([]); // new state for parent snippets
+  const initialState = {
+    header: '',
+    content: '',
+    image: '',
+    parentId: ''
+  }
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const user = localStorage.getItem("user_id");
+        console.log(user);
+        const res = await Client.get(`users/get/${user}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUser(res.data);
+        console.log(res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchUser();
+  }, []);
+
+  useEffect(() => {
+    const fetchSnippets = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await Client.get("/snippets", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setSnippets(res.data);
+
+        // update parent snippets dropdown
+        const parentSnippets = res.data.filter(s => s.storyId === story.id && s.id !== snippet.id); // exclude the current snippet from the dropdown options
+        setParentSnippets(parentSnippets);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchSnippets();
+  }, [story.id, snippet.id]);
+
+  const handleSubmitStory = async (event) => {
+    event.preventDefault();
+    try {
+      console.log(user.username);
+      const res = await Client.post("/stories", {
+        ...story,
+        authorId: user.id,
+        likes: 0,
+      });
+      console.log(res.data);
+      setStory(res.data);
+    } catch (err) {
+      console.error(err);
     }
+  };
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const token = localStorage.getItem("token");
-                const user = localStorage.getItem("user_id");
-                console.log(user);
-                const res = await Client.get(`users/get/${user}`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-                setUser(res.data);
-                console.log(res.data);
-            } catch (err) {
-                console.error(err);
-            }
-        };
-        fetchUser();
-    }, []);
+  const handleSubmitSnippet = async (event) => {
+    event.preventDefault();
+    try {
+      const res = await Client.post("/snippets", {
+        ...snippet,
+        storyId: story.id,
+        authorId: user.username,
+      });
+      console.log(res.data);
+      setSnippets([...snippets, res.data]);
+      setSnippet(initialState); // reset the snippet form
+      document.getElementById("snippet-form").reset(); // reset the form input fields
 
-    const handleSubmitStory = async (event) => {
-        event.preventDefault();
-        try {
-            console.log(user.username);
-            const res = await Client.post("/stories", {
-                ...story,
-                authorId: user.id,
-                likes: 0,
-            });
-            console.log(res.data);
-            setStory(res.data);
-        } catch (err) {
-            console.error(err);
-        }
-    };
+      // Add child-parent relation
+      if (parentSnippets) {
+        const response = await Client.post("snippets/children", {
+          parentSnippetId: parentSnippets,
+          childSnippetId: res.data.id
+        });
+        console.log(response.data);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-    const handleSubmitSnippet = async (event) => {
-        event.preventDefault();
-        try {
-            const res = await Client.post("/snippets", {
-                ...snippet,
-                storyId: story.id,
-                authorId: user.username,
-            });
-            console.log(res.data);
-            setSnippets([...snippets, res.data]);
-            setSnippet(initialState); // reset the snippet form
-            document.getElementById("snippet-form").reset(); // reset the form input fields
-        } catch (err) {
-            console.error(err);
-        }
-    };
+  const handleChangeStory = (event) => {
+    setStory({ ...story, [event.target.name]: event.target.value });
+  };
 
-    const handleChangeStory = (event) => {
-        setStory({ ...story, [event.target.name]: event.target.value });
-    };
+  const handleChangeSnippet = (event) => {
+    setSnippet({ ...snippet, [event.target.name]: event.target.value });
+  };
 
-    const handleChangeSnippet = (event) => {
-        setSnippet({ ...snippet, [event.target.name]: event.target.value });
-    };
+  const addSnippet = () => {
+    setSnippet({}); // reset the snippet form
+  };
 
-    const addSnippet = () => {
-        setSnippet({}); // reset the snippet form
-    };
-
-
-    return (
-        <div>
-          {story.id ? (
-            <>
-              <h2>Story Info:</h2>
-              <p>Title: {story.title}</p>
-              <p>Author: {user.username}</p>
-              <p>Image URL: {story.image}</p>
-      
-              <form onSubmit={handleSubmitSnippet} id="snippet-form">
-                <label htmlFor="header">Header:</label>
-                <input
-                  type="text"
-                  name="header"
-                  onChange={handleChangeSnippet}
-                  required
-                />
-                <label htmlFor="content">Content:</label>
-                <textarea
-                  name="content"
-                  onChange={handleChangeSnippet}
-                  required
-                ></textarea>
-                <label htmlFor="image">Image URL:</label>
-                <input
-                  type="text"
-                  name="image"
-                  onChange={handleChangeSnippet}
-                  required
-                />
-                <label htmlFor="parentId">Parent Snippet ID (if applicable):</label>
-                <input
-                  type="text"
-                  name="parentId"
-                  onChange={handleChangeSnippet}
-                />
-                <button type="submit">Add Snippet</button>
-              </form>
-      
-              {snippet.id && (
-                <>
-                  <p>Snippet added successfully!</p>
-                  <p>Snippet ID: {snippet.id}</p>
-                  <p>Snippet Header: {snippet.header}</p>
-                  <p>Snippet Content: {snippet.content}</p>
-                  <p>Snippet Image URL: {snippet.image}</p>
-                  <button onClick={() => setSnippet({})}>Add Another Snippet</button>
-                </>
-              )}
-      
-              {snippets.length > 0 && (
-                <div>
-                  <h2>All Snippets:</h2>
-                  {snippets.map((s) => (
-                    <p key={s.id}>
-                      Snippet ID: {s.id} | Snippet Content: {s.content}
-                    </p>
-                  ))}
-                </div>
-              )}
-      
-            </>
-          ) : (
-            <form onSubmit={handleSubmitStory}>
-              <label htmlFor="title">Title:</label>
-              <input type="text" name="title" onChange={handleChangeStory} required />
-              {/* <label htmlFor="authorId">Author:</label>
-              <textarea
-                name="authorId"
-                onChange={handleChangeStory}
-                required
-              ></textarea> */}
-              <label htmlFor="image">Image:</label>
-              <input type="text" name="image" onChange={handleChangeStory} required />
-              <button type="submit">Create Story</button>
-            </form>
-          )}
-      
-          <div className="backBtn">
-            {/* <Link to={"/home"} className="backLink">
-                          <p>Back</p>
-                      </Link> */}
-          </div>
-        </div>
-      );
+  return (
+    <div>
+      {story.id ? (
+        <>
+          <h2>Story Info:</h2>
+          <p>Title: {story.title}</p>
+          <p>Author: {user.username}</p>
+          <form id="snippet-form" onSubmit={handleSubmitSnippet}>
+            <h2>Add a Snippet:</h2>
+            <label htmlFor="header">Header:</label>
+            <input type="text" id="header" name="header" onChange={handleChangeSnippet} />
+            <label htmlFor="content">Content:</label>
+            <textarea id="content" name="content" onChange={handleChangeSnippet}></textarea>
+            <label htmlFor="image">Image:</label>
+            <input type="text" id="image" name="image" onChange={handleChangeSnippet} />
+            <label htmlFor="parentId">Parent:</label>
+            <select onChange={(e) => setParentSnippets(e.target.value)}>
+              {snippets.map((snippet) => (
+                <option value={snippet.id} >
+                  {snippet.header}
+                </option>
+              ))}
+            </select>
+            <button type="submit">Add Snippet</button>
+          </form>
+          {/* <button onClick={addSnippet}>Add Another Snippet</button> */}
+          <h2>Snippets:</h2>
+          <ul>
+            {snippets.map((snippet) => (
+              <li key={snippet.id}>
+                <p>Header: {snippet.header}</p>
+                <p>Snippet ID: {snippet.id}</p>
+                <br></br>
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <>
+          <h2>Add a Story:</h2>
+          <form onSubmit={handleSubmitStory}>
+            <label htmlFor="title">Title:</label>
+            <input type="text" id="title" name="title" onChange={handleChangeStory} />
+            <label htmlFor="image">Image:</label>
+            <input type="text" id="image" name="image" onChange={handleChangeStory} />
+            <button type="submit">Add Story</button>
+          </form>
+        </>
+      )}
+    </div>
+  );
 };
 
 export default AddStory;
