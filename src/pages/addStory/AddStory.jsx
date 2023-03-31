@@ -107,6 +107,14 @@ const AddStory = () => {
     setSnippet({}); // reset the snippet form
   };
 
+  const handleDeleteSnippet = async (snippet) => {
+    console.log(snippet);
+    await Client.delete(`/snippets/${snippet.id}`);
+    setSnippets(snippets.filter(s => s.id !== snippet.id));
+  };
+
+console.log(story.id);
+
   return (
     <div>
       {story.id ? (
@@ -134,11 +142,18 @@ const AddStory = () => {
           </form>
           {/* <button onClick={addSnippet}>Add Another Snippet</button> */}
           <h2>Snippets:</h2>
+          <br />
+          <Link to={`/stories/${story.id}/add-snippet`} /> <h3>Edit Snippets </h3> <Link/>
+          <br />
           <ul>
             {snippets.map((snippet) => (
               <li key={snippet.id}>
                 <p>Header: {snippet.header}</p>
-                <p>Snippet ID: {snippet.id}</p>
+                <p>content: {snippet.content}</p>
+                <button onClick={() =>
+                  handleDeleteSnippet(snippet)}>Delete</button>
+                <br></br>
+                <br></br>
                 <br></br>
               </li>
             ))}
