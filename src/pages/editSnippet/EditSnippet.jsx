@@ -8,7 +8,7 @@ const EditSnippet = ({ story }) => {
     const [snippetHeader, setSnippetHeader] = useState("");
     const [snippetContent, setSnippetContent] = useState("");
     const [snippetImage, setSnippetImage] = useState("");
-    const [snippetParentId, setSnippetParentId] = useState("");
+    const [parentSnippetId, setparentSnippetId] = useState("");
     const [selectedSnippet, setSelectedSnippet] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,7 +36,7 @@ const EditSnippet = ({ story }) => {
         setSnippetHeader("");
         setSnippetContent("");
         setSnippetImage("");
-        setSnippetParentId("");
+        setparentSnippetId("");
         setIsSubmitting(false);
     };
 
@@ -45,9 +45,10 @@ const EditSnippet = ({ story }) => {
         setSnippetHeader(snippet.header);
         setSnippetContent(snippet.content);
         setSnippetImage(snippet.image);
-        setSnippetParentId(snippet.parentId);
+        setparentSnippetId(snippet.parentId);
         setIsEditing(true);
     };
+
 
     const handleUpdateSnippet = async (event) => {
         event.preventDefault();
@@ -57,15 +58,16 @@ const EditSnippet = ({ story }) => {
             header: snippetHeader,
             content: snippetContent,
             image: snippetImage,
-            parentId: snippetParentId,
         };
         await Client.put(`/snippets/${selectedSnippet.id}`, updatedSnippet);
+        const relation = {parentSnippetId: parentSnippetId, childSnippetId: selectedSnippet.id}
+        await Client.post(`/snippets/children`, relation)
         setSnippets(snippets.map(snippet => (snippet.id === updatedSnippet.id ? updatedSnippet : snippet)));
         setSelectedSnippet(null);
         setSnippetHeader("");
         setSnippetContent("");
         setSnippetImage("");
-        setSnippetParentId("");
+        setparentSnippetId("");
         setIsEditing(false);
         setIsSubmitting(false);
     };
@@ -98,23 +100,6 @@ const EditSnippet = ({ story }) => {
                 <button type="submit" disabled={isSubmitting}>Submit</button>
             </form>
             <hr />
-            <h2>Edit snippets:</h2>
-            <ul>
-                {snippets.map((snippet) => (
-                    <li key={snippet.id}>
-                        <div>
-                            <h3>{snippet.header}</h3>
-                            <p>{snippet.content}</p>
-                            <p>{snippet.id}</p>
-                            {snippet.image && <img src={snippet.image} alt={snippet.header} />}
-                            <button onClick={() => handleEditSnippet(snippet)}>Edit</button>
-                            <button onClick={() =>
-
-                                handleDeleteSnippet(snippet)}>Delete</button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
             {isEditing && (
                 <div>
                     <h2>Edit snippet:</h2>
@@ -136,7 +121,13 @@ const EditSnippet = ({ story }) => {
                         <br />
                         <label>
                             ParentId:
-                            <input type="text" value={snippetParentId} onChange={(e) => setSnippetParentId(e.target.value)} />
+                            <select onChange={(e) => setparentSnippetId(e.target.value)}>
+                                {snippets.map((snippet) => (
+                                    <option value={snippet.id} >
+                                        {snippet.header}
+                                    </option>
+                                ))}
+                            </select>
                         </label>
                         <br />
                         <button type="submit" disabled={isSubmitting}>Update</button>
@@ -144,6 +135,23 @@ const EditSnippet = ({ story }) => {
                     </form>
                 </div>
             )}
+            <h2>Edit snippets:</h2>
+            <ul>
+                {snippets.map((snippet) => (
+                    <li key={snippet.id}>
+                        <div>
+                            <h3>{snippet.header}</h3>
+                            <p>{snippet.content}</p>
+                            <p>{snippet.id}</p>
+                            {snippet.image && <img src={snippet.image} alt={snippet.header} />}
+                            <button onClick={() => handleEditSnippet(snippet)}>Edit</button>
+                            <button onClick={() =>
+
+                                handleDeleteSnippet(snippet)}>Delete</button>
+                        </div>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };
