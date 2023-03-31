@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Client from './services/api';
 import Landing from './pages/landing/Landing';
 import Home from './pages/home/Home';
+import YourStories from './pages/yourStories/YourStories';
 import EditStory from './pages/editStory/EditStory';
 import EditSnippet from './pages/editSnippet/EditSnippet';
 import AddStory from './pages/addStory/AddStory';
@@ -61,7 +62,8 @@ function App() {
         } />
         <Route path="/add/story" element={<AddStory user={user} getStories={getStories} setUser={setUser} />} />
         {/* <Route path='/auth' element={<UserDash user={user} setUser={setUser} />}></Route> */}
-        <Route path='/edit' element={<EditStory user={user} setUser={setUser} />}></Route> 
+        <Route path='/your-stories' element={<YourStories user={user} setUser={setUser} />}></Route> 
+        <Route path='/edit/:storyId' element={<EditStory user={user} setUser={setUser} />}></Route> 
         <Route path='/stories/:storyId/add-snippet' element={<EditSnippet user={user} setUser={setUser} />}></Route> 
       </Routes>
     </div>
