@@ -71,6 +71,7 @@ const EditSnippet = ({ story }) => {
     };
 
     const handleDeleteSnippet = async (snippet) => {
+        console.log(snippet);
         await Client.delete(`/snippets/${snippet.id}`);
         setSnippets(snippets.filter(s => s.id !== snippet.id));
     };
@@ -92,11 +93,6 @@ const EditSnippet = ({ story }) => {
                 <label>
                     Image:
                     <input type="text" value={snippetImage} onChange={(e) => setSnippetImage(e.target.value)} />
-                </label>
-                <br />
-                <label>
-                    ParentId:
-                    <input type="text" value={snippetParentId} onChange={(e) => setSnippetParentId(e.target.value)} />
                 </label>
                 <br />
                 <button type="submit" disabled={isSubmitting}>Submit</button>
@@ -136,6 +132,11 @@ const EditSnippet = ({ story }) => {
                         <label>
                             Image:
                             <input type="text" value={snippetImage} onChange={(e) => setSnippetImage(e.target.value)} />
+                        </label>
+                        <br />
+                        <label>
+                            ParentId:
+                            <input type="text" value={snippetParentId} onChange={(e) => setSnippetParentId(e.target.value)} />
                         </label>
                         <br />
                         <button type="submit" disabled={isSubmitting}>Update</button>
