@@ -28,8 +28,7 @@ const YourStories = () => {
     }, []);
 
     const handleEditClick = (storyId) => {
-        // Navigate to the edit page for this story
-        // using react-router or other navigation library
+        window.location.href = `/edit/${storyId}`;
     };
 
     const handleReadClick = (storyId) => {

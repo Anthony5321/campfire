@@ -64,7 +64,7 @@ function App() {
         {/* <Route path='/auth' element={<UserDash user={user} setUser={setUser} />}></Route> */}
         <Route path='/your-stories' element={<YourStories user={user} setUser={setUser} />}></Route> 
         <Route path='/edit/:storyId' element={<EditStory user={user} setUser={setUser} />}></Route> 
-        <Route path='/stories/:storyId/add-snippet' element={<EditSnippet user={user} setUser={setUser} />}></Route> 
+        <Route path='/stories/:storyId/add-edit-snippet' element={<EditSnippet user={user} setUser={setUser} />}></Route> 
       </Routes>
     </div>
   );
