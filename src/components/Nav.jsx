@@ -1,35 +1,30 @@
-import { Link, useNavigate } from 'react-router-dom'
-import{ useState } from "react";
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import './Nav.css';
 
-const Nav = ({ user, setUser }) => {
+const Nav = () => {
+  const [showMenu, setShowMenu] = useState(false);
 
-  const navigate = useNavigate()
-
-  const [state, setState] = useState(false)
-
- const handleClick = () => {
-    setState(!state)
-}
-
-  const handleLogOut = () => {
-    setUser(null)
-    localStorage.clear()
-    navigate('/Login')
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
   }
 
   return (
-    <nav className='links'>
-        <h3 className='link-title'>Campfire</h3>
-      <div id="mobile" onClick={handleClick}>
-        <i id="bar"
-        className={state ? 'fas fa-times' : 'fas fa-bars'}></i>
-        <Link to={"/home"} className="backLink"><p>Home</p></Link>
-        <Link to={"/add/story"}><p>Create A Story</p></Link>
-        <Link to={"/your-stories"}><p>Your Stories</p></Link>
-    </div>
+    <nav className='navbar'>
+      <h3 className='navbar-title'>Campfire</h3>
+      <div className='navbar-burger' onClick={toggleMenu}>
+        <div className={`navbar-burger-line ${showMenu ? 'active' : ''}`}></div>
+        <div className={`navbar-burger-line ${showMenu ? 'active' : ''}`}></div>
+        <div className={`navbar-burger-line ${showMenu ? 'active' : ''}`}></div>
+        <div className={`navbar-burger-line ${showMenu ? 'active' : ''}`}></div>
+      </div>
+      <div className={`navbar-links ${showMenu ? 'show' : ''}`}>
+        <Link className='navbar-link' to={"/home"}>Home</Link>
+        <Link className='navbar-link' to={"/add/story"}>Create A Story</Link>
+        <Link className='navbar-link' to={"/your-stories"}>Your Stories</Link>
+      </div>
     </nav>
   )
 }
 
-
-export default Nav
+export default Nav;

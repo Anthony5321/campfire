@@ -1,0 +1,72 @@
+.story-page-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.story-page__title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.story-page__image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.story-page__form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.story-page__input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #a3a3a3;
+    width: 300px;
+    font-size: 1rem;
+    align-self: center;
+}
+
+.story-page__form label {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.story-page__button-save {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-right: 10px;
+    max-width: 100px;
+    align-self: center;
+}
+
+.story-page__button-save:hover {
+    background-color: #555;
+}
+
+.story-page__button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.story-page__button:hover {
+    background-color: #555;
+}

@@ -1,6 +1,7 @@
 import '../pages/home/Home.css'
 import { useEffect, useState } from 'react'
 import Client from '../services/api'
+import '../pages/home/Home.css'
 
 const BookCard = (props) => {
 
@@ -26,11 +27,11 @@ const BookCard = (props) => {
 
 
   return (
-    <div onClick={props.onClick}>
+    <div onClick={props.onClick} className="book-card">
       <div>
         <img src={props.image} alt="Book-image" />
       </div>
-      <div>
+      <div className="book-card-info">
         <h5>{props.title}</h5>
         <p>By: {userName}</p>
         <p>Rating: {props.likes}</p>

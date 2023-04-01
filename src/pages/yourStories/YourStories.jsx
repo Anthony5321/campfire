@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './YourStories.css';
 import Client from '../../services/api';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import StoryList from '../../components/storyList';
 
 const YourStories = () => {
@@ -27,30 +27,26 @@ const YourStories = () => {
         fetchUserStories();
     }, []);
 
-    const handleEditClick = (storyId) => {
-        window.location.href = `/edit/${storyId}`;
-    };
-
     const handleReadClick = (storyId) => {
         window.location.href = `/stories/${storyId}`;
     };
-    
 
     return (
-        <div>
+        <div className="your-stories-container">
             {selectedStoryId ? (
                 <StoryList storyId={selectedStoryId} />
             ) : (
                 stories.map((story) => (
-                    <div key={story.id}>
+                    <div key={story.id} className="story-card">
                         <img
                             src={story.image}
                             alt={story.title}
                             onClick={() => handleReadClick(story.id)}
+                            className="story-card__image"
                         />
-                        <h2>{story.title}</h2>
-                        <button onClick={() => handleEditClick(story.id)}>Edit</button>
-                        <button onClick={() => handleReadClick(story.id)}>Read</button>
+                        <h2 className="story-card__title">{story.title}</h2>
+                        <Link to={`/edit/${story.id}`} state={{ storyInfo: story }}><button className="story-card__button">Edit</button></Link>
+                        <button className="story-card__button" onClick={() => handleReadClick(story.id)}>Read</button>
                     </div>
                 ))
             )}

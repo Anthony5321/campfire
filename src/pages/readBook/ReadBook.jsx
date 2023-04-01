@@ -92,26 +92,26 @@ const ReadBook = () => {
   }, [allSnippets]);
 
   return (
-    <div>
+    <div className="readBook-container">
       {snippet && (
         <>
-          <img src={snippet.image} alt="image" />
-          <p>{snippet.content}</p>
+          <img src={snippet.image} alt="image" className="readBook-image" />
+          <p className="readBook-content">{snippet.content}</p>
           {allSnippets && allSnippets.length > 0 && (
-            <>
+            <div className="readBook-buttons">
               {allSnippets.map((child) => (
-                <button key={child.id} onClick={() => GetSnippet(child.id)}>
+                <button key={child.id} onClick={() => GetSnippet(child.id)} className="readBook-btn">
                   {child.header}
                 </button>
               ))}
-            </>
+            </div>
           )}
         </>
       )}
       <div className="backBtn">
-        {/* <Link to={'/home'} className="backLink">
+        <Link to={'/home'} className="backLink">
           <p>Back</p>
-        </Link> */}
+        </Link>
       </div>
     </div>
   );

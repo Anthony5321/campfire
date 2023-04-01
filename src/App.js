@@ -9,7 +9,6 @@ import EditStory from './pages/editStory/EditStory';
 import EditSnippet from './pages/editSnippet/EditSnippet';
 import AddStory from './pages/addStory/AddStory';
 import ReadBook from './pages/readBook/ReadBook';
-// import UserDash from './pages/userDash/UserDash';
 // import About from './pages/about/About';
 
 function App() {
@@ -61,7 +60,6 @@ function App() {
           <ReadBook story={story} getStories={getStories} user={user} setUser={setUser} />
         } />
         <Route path="/add/story" element={<AddStory user={user} getStories={getStories} setUser={setUser} />} />
-        {/* <Route path='/auth' element={<UserDash user={user} setUser={setUser} />}></Route> */}
         <Route path='/your-stories' element={<YourStories user={user} setUser={setUser} />}></Route> 
         <Route path='/edit/:storyId' element={<EditStory user={user} setUser={setUser} />}></Route> 
         <Route path='/stories/:storyId/add-edit-snippet' element={<EditSnippet user={user} setUser={setUser} />}></Route> 

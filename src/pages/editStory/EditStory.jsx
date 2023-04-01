@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import './EditStory.css';
 import Client from '../../services/api';
-import { useParams, useLocation} from 'react-router-dom';
+import { useParams, useLocation, useNavigate} from 'react-router-dom';
 
 const EditStory = () => {
   const [story, setStory] = useState(null);
   const { storyId } = useParams();
-  
+  const navigate = useNavigate()
+
+
   const editStory = async (data) => {
     try {
       await Client.put(`/stories/${storyId}`, data)
@@ -64,19 +66,26 @@ const EditStory = () => {
     window.location.href = `/stories/${storyId}/add-edit-snippet`;
   };
 
+  const deleteStory = async () => {
+    console.log(storyInfo);
+    await Client.delete(`/stories/${story.id}`);
+    navigate('/your-stories')
+  }
+
   return (
-    <div>
+    <div className="story-page-container">
       {story ? (
         <div>
-          <h2>{story.title}</h2>
-          <img src={story.image} alt={story.title} />
-          <form onSubmit={onSubmit} className='addForm'>
+          <h2 className="story-page__title">{story.title}</h2>
+          <img src={story.image} alt={story.title} className="story-page__image" />
+          <form onSubmit={onSubmit} className='story-page__form'>
           <input
               name="title"
               type="text"
               defaultValue={formValues.title}
               onChange={handleChange}
               required
+              className="story-page__input"
             />
           <input
               name="image"
@@ -84,10 +93,12 @@ const EditStory = () => {
               defaultValue={formValues.image}
               onChange={handleChange}
               required
+              className="story-page__input"
             />
-          <button type='submit'>Save</button>
+          <button type='submit' className="story-page__button-save">Save</button>
           </form>
-          <button onClick={() => handleSnippetEdit(story.id)}>Edit Snippets</button>
+          <button className="story-page__button" onClick={() => handleSnippetEdit(story.id)}>Edit Snippets</button>
+          <button className="story-page__button" onClick={() => deleteStory(story.id)}>Delete Story</button>
         </div>
       ) : (
         <p>Loading...</p>
