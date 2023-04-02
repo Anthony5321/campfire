@@ -81,7 +81,7 @@ const ReadBook = () => {
       }
     };
     fetchData();
-  }, [storyId]);
+  }, [storyId, setFirstSnippet]);
 
   useEffect(() => {
     console.log(`snippet:`, snippet);
