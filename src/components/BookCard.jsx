@@ -23,13 +23,13 @@ const BookCard = (props) => {
 
   useEffect(() => {
     GetUser()
-  }, [author])
+  }, [author, GetUser])
 
 
   return (
     <div onClick={props.onClick} className="book-card">
       <div>
-        <img src={props.image} alt="Book-image" />
+        <img src={props.image} />
       </div>
       <div className="book-card-info">
         <h5>{props.title}</h5>

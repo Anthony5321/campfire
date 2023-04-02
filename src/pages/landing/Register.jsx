@@ -103,7 +103,7 @@ const Register = ({ toggleForm }) => {
                 Register
             </button>
             <div className='createFormText'>
-                <p className='pCreate'>Already a user? <a onClick={() => toggleForm()}>Sign in</a></p>
+                <p className='pCreate'>Already a user? <a href="#" onClick={() => toggleForm()}>Sign in</a></p>
             </div>
         </form>
     )

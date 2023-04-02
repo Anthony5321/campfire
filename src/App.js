@@ -46,7 +46,7 @@ function App() {
     if (token) {
       checkToken()
     }
-  }, [])
+  }, [checkToken])
 
 
 

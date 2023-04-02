@@ -75,7 +75,15 @@ const ReadBook = () => {
     const fetchData = async () => {
       try {
         const snippets = await getAllSnippets(storyId);
-        setFirstSnippet(snippets);
+        if (snippets && snippets.length > 0) {
+          console.log(`setFirstSnippet snippets:`, snippets);
+          const firstSnippet = snippets[0];
+          setSnippet(firstSnippet);
+          const children = await getChildSnippets(firstSnippet.id);
+          setAllSnippets(children);
+        } else {
+          console.log("No snippets found");
+        }
       } catch (err) {
         console.error(err);
       }
@@ -95,7 +103,7 @@ const ReadBook = () => {
     <div className="readBook-container">
       {snippet && (
         <>
-          <img src={snippet.image} alt="image" className="readBook-image" />
+          <img src={snippet.image} className="readBook-image" />
           <p className="readBook-content">{snippet.content}</p>
           {allSnippets && allSnippets.length > 0 && (
             <div className="readBook-buttons">

@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import Nav from '../../components/Nav'
 import './Landing.css'
-import landing from '../../imgs/landing_pic.jpg'
+// import landing from '../../imgs/landing_pic.jpg'
 import LoginForm from './LoginForm'
 import Register from './Register'
 

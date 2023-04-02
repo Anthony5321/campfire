@@ -54,7 +54,7 @@ const EditStory = () => {
 
   useEffect(() => {
     fetchStory();
-  }, [storyId]);
+  }, [storyId, fetchStory]);
 
   const onSubmit = (e) => {
     e.preventDefault()

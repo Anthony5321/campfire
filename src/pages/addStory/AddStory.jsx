@@ -104,9 +104,9 @@ const AddStory = () => {
     setSnippet({ ...snippet, [event.target.name]: event.target.value });
   };
 
-  const addSnippet = () => {
-    setSnippet({}); // reset the snippet form
-  };
+  // const addSnippet = () => {
+  //   setSnippet({}); // reset the snippet form
+  // };
 
   const handleDeleteSnippet = async (snippet) => {
     console.log(snippet);

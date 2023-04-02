@@ -6,8 +6,8 @@ import StoryList from '../../components/storyList';
 
 const YourStories = () => {
     const [stories, setStories] = useState([]);
-    const [selectedStoryId, setSelectedStoryId] = useState(null);
-    const { id } = useParams();
+    // const [selectedStoryId, setSelectedStoryId] = useState(null);
+    // const { id } = useParams();
 
     useEffect(() => {
         const fetchUserStories = async () => {
@@ -33,23 +33,19 @@ const YourStories = () => {
 
     return (
         <div className="your-stories-container">
-            {selectedStoryId ? (
-                <StoryList storyId={selectedStoryId} />
-            ) : (
-                stories.map((story) => (
-                    <div key={story.id} className="story-card">
-                        <img
-                            src={story.image}
-                            alt={story.title}
-                            onClick={() => handleReadClick(story.id)}
-                            className="story-card__image"
-                        />
-                        <h2 className="story-card__title">{story.title}</h2>
-                        <Link to={`/edit/${story.id}`} state={{ storyInfo: story }}><button className="story-card__button">Edit</button></Link>
-                        <button className="story-card__button" onClick={() => handleReadClick(story.id)}>Read</button>
-                    </div>
-                ))
-            )}
+            {stories.map((story) => (
+                <div key={story.id} className="story-card">
+                    <img
+                        src={story.image}
+                        alt={story.title}
+                        onClick={() => handleReadClick(story.id)}
+                        className="story-card__image"
+                    />
+                    <h2 className="story-card__title">{story.title}</h2>
+                    <Link to={`/edit/${story.id}`} state={{ storyInfo: story }}><button className="story-card__button">Edit</button></Link>
+                    <button className="story-card__button" onClick={() => handleReadClick(story.id)}>Read</button>
+                </div>
+            ))}
         </div>
     );
 };
