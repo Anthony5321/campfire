@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import './ReadBook.css';
 import { Link } from 'react-router-dom';
 import Client from '../../services/api';
@@ -9,18 +9,6 @@ const ReadBook = () => {
   const [snippet, setSnippet] = useState({});
   const [allSnippets, setAllSnippets] = useState([]);
 
-  const setFirstSnippet = async (snippets) => {
-    if (snippets && snippets.length > 0) {
-      console.log(`setFirstSnippet snippets:`, snippets);
-      const firstSnippet = snippets[0];
-      setSnippet(firstSnippet);
-      const children = await getChildSnippets(firstSnippet.id);
-      setAllSnippets(children);
-    } else {
-      console.log("No snippets found");
-    }
-  };
-  
   const getAllSnippets = async (storyId) => {
     try {
       const res = await Client.get(`/snippets/story/${storyId}`);
@@ -36,7 +24,7 @@ const ReadBook = () => {
       return [];
     }
   };
-  
+
   const getChildSnippets = async (snippetId) => {
     try {
       const res = await Client.get(`/snippets/snippet/${snippetId}`);
@@ -52,7 +40,7 @@ const ReadBook = () => {
       return [];
     }
   };
-  
+
   const GetSnippet = async (snippetId) => {
     try {
       const snippets = await getAllSnippets(storyId);
@@ -70,18 +58,26 @@ const ReadBook = () => {
       console.error(err);
     }
   };
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const snippets = await getAllSnippets(storyId);
-        setFirstSnippet(snippets);
+        if (snippets && snippets.length > 0) {
+          console.log(`setFirstSnippet snippets:`, snippets);
+          const firstSnippet = snippets[0];
+          setSnippet(firstSnippet);
+          const children = await getChildSnippets(firstSnippet.id);
+          setAllSnippets(children);
+        } else {
+          console.log("No snippets found");
+        }
       } catch (err) {
         console.error(err);
       }
     };
     fetchData();
-  }, [storyId, setFirstSnippet]);
+  }, [storyId]);
 
   useEffect(() => {
     console.log(`snippet:`, snippet);
