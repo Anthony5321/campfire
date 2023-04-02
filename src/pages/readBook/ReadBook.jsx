@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import './ReadBook.css';
 import { Link } from 'react-router-dom';
 import Client from '../../services/api';
