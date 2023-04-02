@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import './YourStories.css';
 import Client from '../../services/api';
-import { useParams, Link } from 'react-router-dom';
-import StoryList from '../../components/storyList';
+import { Link } from 'react-router-dom';
+// import StoryList from '../../components/storyList';
 
 const YourStories = () => {
     const [stories, setStories] = useState([]);

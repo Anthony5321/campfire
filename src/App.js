@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Client from './services/api';
 import Landing from './pages/landing/Landing';
 import Home from './pages/home/Home';
@@ -12,57 +12,52 @@ import ReadBook from './pages/readBook/ReadBook';
 // import About from './pages/about/About';
 
 function App() {
+  const [user, setUser] = useState(null);
+  const [story, setStory] = useState([]);
 
-  const [user, setUser] = useState(null)
-
-  const [story, setStory] = useState([])
-  const getStories = async () => {
+  const getStories = useCallback(async () => {
     try {
-      const res = await Client.get('/stories')
-      setStory(res.data)
+      const res = await Client.get('/stories');
+      setStory(res.data);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  }, []);
 
-  const CheckSession = async () => {
+  const checkToken = useCallback(async () => {
     try {
-      const res = await Client.get('/users/session')
+      const res = await Client.get('/users/session');
       console.log(res);
-      return res.data
+      return res.data;
     } catch (error) {
-      throw error
+      throw error;
     }
-  }
-
-  const checkToken = async () => {
-    const user = await CheckSession()
-    setUser(user)
-  }
+  }, []);
 
   useEffect(() => {
-    getStories()
-    const token = localStorage.getItem('token')
+    getStories();
+    const token = localStorage.getItem('token');
     if (token) {
-      checkToken()
+      checkToken().then((user) => {
+        setUser(user);
+      });
     }
-  }, [checkToken])
-
-
+  }, [getStories, checkToken]);
 
   return (
     <div className="App">
       <Routes className="Routes">
-        <Route path='/' element={<Landing />} />
-        <Route path='/home' element={<Home user={user} setUser={setUser} />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/home" element={<Home user={user} setUser={setUser} />} />
         {/* <Route path="/about" element={<About user={user} setUser={setUser} />} /> */}
-        <Route path="/stories/:id" element={
-          <ReadBook story={story} getStories={getStories} user={user} setUser={setUser} />
-        } />
+        <Route
+          path="/stories/:id"
+          element={<ReadBook story={story} getStories={getStories} user={user} setUser={setUser} />}
+        />
         <Route path="/add/story" element={<AddStory user={user} getStories={getStories} setUser={setUser} />} />
-        <Route path='/your-stories' element={<YourStories user={user} setUser={setUser} />}></Route> 
-        <Route path='/edit/:storyId' element={<EditStory user={user} setUser={setUser} />}></Route> 
-        <Route path='/stories/:storyId/add-edit-snippet' element={<EditSnippet user={user} setUser={setUser} />}></Route> 
+        <Route path="/your-stories" element={<YourStories user={user} setUser={setUser} />} />
+        <Route path="/edit/:storyId" element={<EditStory user={user} setUser={setUser} />} />
+        <Route path="/stories/:storyId/add-edit-snippet" element={<EditSnippet user={user} setUser={setUser} />} />
       </Routes>
     </div>
   );

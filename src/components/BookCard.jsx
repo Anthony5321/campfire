@@ -1,35 +1,30 @@
-import '../pages/home/Home.css'
-import { useEffect, useState } from 'react'
-import Client from '../services/api'
-import '../pages/home/Home.css'
+import { useCallback, useEffect, useState } from 'react';
+import Client from '../services/api';
+import '../pages/home/Home.css';
 
 const BookCard = (props) => {
+  const author = props.authorId;
+  const [userName, setUserName] = useState('');
 
-  const author = props.authorId
-  const [userName, setUserName] = useState('')
-
-  const GetUser = async (data) => {
+  const GetUser = useCallback(async () => {
     try {
-      const res = await Client.get(`/users/get/${author}`, data)
+      const res = await Client.get(`/users/get/${author}`);
       console.log(res.data);
-      setUserName(res.data.username)
+      setUserName(res.data.username);
     } catch (error) {
-      throw error
+      throw error;
     }
-  }
-
-
-
+  }, [author]);
 
   useEffect(() => {
-    GetUser()
-  }, [author, GetUser])
+    GetUser();
+  }, [GetUser]);
 
 
   return (
     <div onClick={props.onClick} className="book-card">
       <div>
-        <img src={props.image} />
+        <img src={props.image} alt=''/>
       </div>
       <div className="book-card-info">
         <h5>{props.title}</h5>

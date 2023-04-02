@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import './EditStory.css';
 import Client from '../../services/api';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
@@ -6,22 +6,20 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 const EditStory = () => {
   const [story, setStory] = useState(null);
   const { storyId } = useParams();
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const editStory = async (data) => {
     try {
-      await Client.put(`/stories/${storyId}`, data)
-
+      await Client.put(`/stories/${storyId}`, data);
     } catch (error) {
-      throw error
+      throw error;
     }
-  }
+  };
 
-  let user = localStorage.getItem('user_id')
+  let user = localStorage.getItem('user_id');
 
-  const locate = useLocation()
-  const storyInfo = locate.state
+  const locate = useLocation();
+  const storyInfo = locate.state;
 
   console.log(user);
   console.log(storyInfo);
@@ -30,37 +28,37 @@ const EditStory = () => {
     authorId: `${user}`,
     title: ``,
     image: ``,
-    likes: 0
-  }
+    likes: 0,
+  };
 
-  const [formValues, setFormValues] = useState(initialState)
+  const [formValues, setFormValues] = useState(initialState);
 
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
-  }
+  };
 
-  const fetchStory = async () => {
+  const fetchStory = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       const res = await Client.get(`/stories/${storyId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setStory(res.data);
-      console.log(res.data)
+      console.log(res.data);
     } catch (err) {
       console.error(err);
     }
-  };
+  }, [storyId]);
 
   useEffect(() => {
     fetchStory();
-  }, [storyId, fetchStory]);
+  }, [fetchStory]);
 
   const onSubmit = (e) => {
-    e.preventDefault()
-    editStory(formValues)
-    fetchStory()
-  }
+    e.preventDefault();
+    editStory(formValues);
+    fetchStory();
+  };
 
   const handleSnippetEdit = (storyId) => {
     window.location.href = `/stories/${storyId}/add-edit-snippet`;
@@ -69,8 +67,9 @@ const EditStory = () => {
   const deleteStory = async () => {
     console.log(storyInfo);
     await Client.delete(`/stories/${story.id}`);
-    navigate('/your-stories')
-  }
+    navigate('/your-stories');
+  };
+
 
   return (
     <div className="story-page-container">

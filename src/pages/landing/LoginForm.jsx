@@ -80,7 +80,12 @@ const LoginForm = ({ toggleForm, setUser }) => {
                 Sign In
             </button>
             <div className='createFormText'>
-                <p className='pCreate'>Not a user? <a href="#" onClick={() => toggleForm()}>Sign up now</a></p>
+                <p className='pCreate'>Not a user? <button
+                    className="link-button"
+                    onClick={() => toggleForm()}
+                >
+                    Sign up now
+                </button></p>
             </div>
         </form>
     )
