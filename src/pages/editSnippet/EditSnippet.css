@@ -1,5 +1,5 @@
 .snippet-page-container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 20px;
   }
@@ -70,6 +70,8 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .snippet-page__contents {
@@ -84,6 +86,11 @@
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
+    max-width: 400px;
+    min-width: 300px;
+    flex-basis: calc(50% - 20px); 
+    margin-right: 20px; 
+    box-sizing: border-box; 
   }
   
   .snippet-page__item h3 {
@@ -101,6 +108,8 @@
     max-width: 100%;
     margin-bottom: 10px;
     border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   hr {

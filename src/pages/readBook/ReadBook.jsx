@@ -110,7 +110,7 @@ const ReadBook = () => {
       )}
       <div className="backBtn">
         <Link to={'/home'} className="backLink">
-          <p>Back</p>
+          <p>Back to home</p>
         </Link>
       </div>
     </div>

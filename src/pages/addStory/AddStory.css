@@ -1,0 +1,161 @@
+.wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.story-info-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.story-info {
+    margin-bottom: 20px;
+}
+
+.story-info__title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.story-info__author {
+    margin-bottom: 5px;
+}
+
+.snippet-form {
+    margin-bottom: 20px;
+}
+
+.add-snippet-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+    outline: none;
+    border-color: #555;
+}
+
+.form-button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.form-button:hover {
+    background-color: #555;
+}
+
+.snippets-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.edit-snippets__link {
+    text-decoration: none;
+}
+
+.edit-snippets__button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.edit-snippets__button:hover {
+    background-color: #555;
+}
+
+.snippet-list {
+    list-style: none;
+    padding: 0;
+}
+
+.snippet-item {
+    margin-bottom: 20px;
+}
+
+.snippet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.snippet-header__text {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.snippet-header__delete-button {
+    background-color: #cc0000;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.snippet-header__delete-button:hover {
+    background-color: #990000;
+}
+
+.snippet-content {
+    margin-left: 15px;
+}
+
+.add-story-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.story-form {
+    margin-bottom: 20px;
+}
+
+.all-done {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.all-done:hover {
+    background-color: #555;
+}

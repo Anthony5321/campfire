@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './EditStory.css';
 import Client from '../../services/api';
-import { useParams, useLocation, useNavigate} from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
 const EditStory = () => {
   const [story, setStory] = useState(null);
@@ -12,33 +12,33 @@ const EditStory = () => {
   const editStory = async (data) => {
     try {
       await Client.put(`/stories/${storyId}`, data)
-      
+
     } catch (error) {
       throw error
     }
   }
-  
+
   let user = localStorage.getItem('user_id')
-  
+
   const locate = useLocation()
-  const storyInfo  = locate.state
-  
+  const storyInfo = locate.state
+
   console.log(user);
   console.log(storyInfo);
-  
+
   const initialState = {
     authorId: `${user}`,
     title: ``,
     image: ``,
     likes: 0
   }
-  
+
   const [formValues, setFormValues] = useState(initialState)
-  
+
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   }
-  
+
   const fetchStory = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -55,7 +55,7 @@ const EditStory = () => {
   useEffect(() => {
     fetchStory();
   }, [storyId]);
-  
+
   const onSubmit = (e) => {
     e.preventDefault()
     editStory(formValues)
@@ -78,8 +78,10 @@ const EditStory = () => {
         <div>
           <h2 className="story-page__title">{story.title}</h2>
           <img src={story.image} alt={story.title} className="story-page__image" />
+          <h1>Edit your title or image</h1>
           <form onSubmit={onSubmit} className='story-page__form'>
-          <input
+            <input
+              placeholder='Title'
               name="title"
               type="text"
               defaultValue={formValues.title}
@@ -87,7 +89,8 @@ const EditStory = () => {
               required
               className="story-page__input"
             />
-          <input
+            <input
+              placeholder='Image'
               name="image"
               type="text"
               defaultValue={formValues.image}
@@ -95,7 +98,7 @@ const EditStory = () => {
               required
               className="story-page__input"
             />
-          <button type='submit' className="story-page__button-save">Save</button>
+            <button type='submit' className="story-page__button-save">Save</button>
           </form>
           <button className="story-page__button" onClick={() => handleSnippetEdit(story.id)}>Edit Snippets</button>
           <button className="story-page__button" onClick={() => deleteStory(story.id)}>Delete Story</button>

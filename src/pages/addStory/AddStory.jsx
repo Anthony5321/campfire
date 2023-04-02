@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './AddStory.css';
 import Client from '../../services/api';
 import { Link } from 'react-router-dom';
@@ -8,6 +8,7 @@ const AddStory = () => {
   const [snippet, setSnippet] = useState({});
   const [user, setUser] = useState({});
   const [snippets, setSnippets] = useState([]);
+  const formRef = useRef(null);
   const [parentSnippets, setParentSnippets] = useState([]); // new state for parent snippets
   const initialState = {
     header: '',
@@ -38,7 +39,7 @@ const AddStory = () => {
     const fetchSnippets = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await Client.get("/snippets", {
+        const res = await Client.get(`/snippets/story/${story.id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setSnippets(res.data);
@@ -72,15 +73,15 @@ const AddStory = () => {
   const handleSubmitSnippet = async (event) => {
     event.preventDefault();
     try {
+      formRef.current.reset();
+      console.log(snippet);
       const res = await Client.post("/snippets", {
         ...snippet,
         storyId: story.id,
-        authorId: user.username,
       });
       console.log(res.data);
       setSnippets([...snippets, res.data]);
       setSnippet(initialState); // reset the snippet form
-      document.getElementById("snippet-form").reset(); // reset the form input fields
 
       // Add child-parent relation
       if (parentSnippets) {
@@ -113,64 +114,73 @@ const AddStory = () => {
     setSnippets(snippets.filter(s => s.id !== snippet.id));
   };
 
-console.log(story.id);
+  console.log(story.id);
 
   return (
-    <div>
+    <div className="wrapper">
       {story.id ? (
         <>
-          <h2>Story Info:</h2>
-          <p>Title: {story.title}</p>
-          <p>Author: {user.username}</p>
-          <form id="snippet-form" onSubmit={handleSubmitSnippet}>
-            <h2>Add a Snippet:</h2>
-            <label htmlFor="header">Header:</label>
-            <input type="text" id="header" name="header" onChange={handleChangeSnippet} />
-            <label htmlFor="content">Content:</label>
-            <textarea id="content" name="content" onChange={handleChangeSnippet}></textarea>
-            <label htmlFor="image">Image:</label>
-            <input type="text" id="image" name="image" onChange={handleChangeSnippet} />
-            <label htmlFor="parentId">Parent:</label>
-            <select onChange={(e) => setParentSnippets(e.target.value)}>
-              {snippets.map((snippet) => (
-                <option value={snippet.id} >
-                  {snippet.header}
-                </option>
-              ))}
-            </select>
-            <button type="submit">Add Snippet</button>
+          <h2 className="story-info-heading">Story Info:</h2>
+          <div className="story-info">
+            <p className="story-info__title">Title: {story.title}</p>
+            <img src={story.image} alt={story.title} className="story-info__image" />
+          </div>
+          <form ref={formRef} className="snippet-form" onSubmit={handleSubmitSnippet}>
+            <h2 className="add-snippet-heading">Add a Snippet:</h2>
+            <div className="form-fields">
+              <label htmlFor="header" className="form-label">Header:</label>
+              <input type="text" id="header" name="header" className="form-input" onChange={handleChangeSnippet} />
+              <label htmlFor="content" className="form-label">Content:</label>
+              <textarea id="content" name="content" className="form-textarea" onChange={handleChangeSnippet}></textarea>
+              <label htmlFor="image" className="form-label">Image:</label>
+              <input type="text" id="image" name="image" className="form-input" onChange={handleChangeSnippet} />
+              <label htmlFor="parentId" className="form-label">Parent:</label>
+              <select key={snippet.id} className="form-select" onChange={(e) => setParentSnippets(e.target.value)}>
+                <option value="none">None</option>
+                {snippets.map((snippet) => (
+                  <option value={snippet.id} key={snippet.id}>
+                    {snippet.header}
+                  </option>
+                ))}
+              </select>
+              <button type="submit" className="form-button">Add Snippet</button>
+            </div>
           </form>
-          {/* <button onClick={addSnippet}>Add Another Snippet</button> */}
-          <h2>Snippets:</h2>
-          <br />
-          <Link to={`/stories/${story.id}/add-snippet`} /> <h3>Edit Snippets </h3> <Link/>
-          <br />
-          <ul>
+          <h2 className="snippets-heading">Snippets:</h2>
+          <div className="edit-snippets">
+            <Link to={`/stories/${story.id}/add-snippet`} className="edit-snippets__link"><button className="edit-snippets__button">Edit Snippets</button></Link>
+          </div>
+          <ul className="snippet-list">
             {snippets.map((snippet) => (
-              <li key={snippet.id}>
-                <p>Header: {snippet.header}</p>
-                <p>content: {snippet.content}</p>
-                <button onClick={() =>
-                  handleDeleteSnippet(snippet)}>Delete</button>
-                <br></br>
-                <br></br>
-                <br></br>
+              <li key={snippet.id} className="snippet-item">
+                <div className="snippet-header">
+                  <p className="snippet-header__text">Header: {snippet.header}</p>
+                  <button onClick={() =>
+                    handleDeleteSnippet(snippet)} className="snippet-header__delete-button">Delete</button>
+                </div>
+                <p className="snippet-content">Content: {snippet.content}</p>
               </li>
             ))}
           </ul>
         </>
       ) : (
         <>
-          <h2>Add a Story:</h2>
-          <form onSubmit={handleSubmitStory}>
-            <label htmlFor="title">Title:</label>
-            <input type="text" id="title" name="title" onChange={handleChangeStory} />
-            <label htmlFor="image">Image:</label>
-            <input type="text" id="image" name="image" onChange={handleChangeStory} />
-            <button type="submit">Add Story</button>
+          <h2 className="add-story-heading">Add a Story:</h2>
+          <form className="story-form" onSubmit={handleSubmitStory}>
+            <div className="form-fields">
+              <label htmlFor="title" className="form-label">Title:</label>
+              <input type="text" id="title" name="title" className="form-input" onChange={handleChangeStory} />
+              <label htmlFor="image" className="form-label">Image:</label>
+              <input type="text" id="image" name="image" className="form-input" onChange={handleChangeStory} />
+              <button type="submit" className="form-button">Add Story</button>
+            </div>
           </form>
         </>
       )}
+      <br />
+      <br />
+      <br />
+      <Link to={`/your-stories`} /><button className="all-done">All done</button><Link />
     </div>
   );
 };

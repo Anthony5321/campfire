@@ -81,26 +81,30 @@ const EditSnippet = ({ story }) => {
 
     return (
         <div className="snippet-page-container">
-            <h2 className="snippet-page__title">Add a new snippet:</h2>
-            <form onSubmit={handleCreateSnippet} className="snippet-page__form">
-                <label className="snippet-page__label">
-                    Header:
-                    <input type="text" value={snippetHeader} onChange={(e) => setSnippetHeader(e.target.value)} className="snippet-page__input" />
-                </label>
-                <br />
-                <label className="snippet-page__label">
-                    Content:
-                    <textarea value={snippetContent} onChange={(e) => setSnippetContent(e.target.value)} className="snippet-page__input" />
-                </label>
-                <br />
-                <label className="snippet-page__label">
-                    Image:
-                    <input type="text" value={snippetImage} onChange={(e) => setSnippetImage(e.target.value)} className="snippet-page__input" />
-                </label>
-                <br />
-                <button type="submit" disabled={isSubmitting} className="snippet-page__button">Submit</button>
-            </form>
-            <hr />
+            {!isEditing && (
+                <div>
+                    <h2 className="snippet-page__title">Add a new snippet:</h2>
+                    <form onSubmit={handleCreateSnippet} className="snippet-page__form">
+                        <label className="snippet-page__label">
+                            Header:
+                            <input type="text" value={snippetHeader} onChange={(e) => setSnippetHeader(e.target.value)} className="snippet-page__input" />
+                        </label>
+                        <br />
+                        <label className="snippet-page__label">
+                            Content:
+                            <textarea value={snippetContent} onChange={(e) => setSnippetContent(e.target.value)} className="snippet-page__input" />
+                        </label>
+                        <br />
+                        <label className="snippet-page__label">
+                            Image:
+                            <input type="text" value={snippetImage} onChange={(e) => setSnippetImage(e.target.value)} className="snippet-page__input" />
+                        </label>
+                        <br />
+                        <button type="submit" disabled={isSubmitting} className="snippet-page__button">Submit</button>
+                    </form>
+                    <hr />
+                </div>
+            )}
             {isEditing && (
                 <div>
                     <h2 className="snippet-page__title">Edit snippet:</h2>
@@ -143,11 +147,11 @@ const EditSnippet = ({ story }) => {
                         <div className="snippet-page__contents">
                             <h3>{snippet.header}</h3>
                             <p>{snippet.content}</p>
-                            <p>{snippet.id}</p>
-                            {snippet.image && <img src={snippet.image} alt={snippet.header} className="snippet-page__image" />}
+                            {/* <p>{snippet.id}</p> */}
                         </div>
-                            <button onClick={() => handleEditSnippet(snippet)} className="snippet-page__button">Edit</button>
-                            <button onClick={() => handleDeleteSnippet(snippet)} className="snippet-page__button">Delete</button>
+                        {snippet.image && <img src={snippet.image} alt={snippet.header} className="snippet-page__image" />}
+                        <button onClick={() => handleEditSnippet(snippet)} className="snippet-page__button">Edit</button>
+                        <button onClick={() => handleDeleteSnippet(snippet)} className="snippet-page__button">Delete</button>
                     </li>
                 ))}
             </ul>
