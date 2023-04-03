@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Client from '../../services/api';
 import { useParams } from 'react-router-dom';
 import './EditSnippet.css'
@@ -18,20 +18,20 @@ const EditSnippet = ({ story }) => {
         content: '',
         image: '',
         parentId: ''
-      }
+    };
 
-      const fetchSnippets = async () => {
+    const fetchSnippets = useCallback(async () => {
         console.log(storyId);
         const snippets = await Client.get(`/snippets/story/${storyId}`);
         snippets.data.sort((a, b) => {
           return new Date(b.updatedAt) - new Date(a.updatedAt);
         });
         setSnippets(snippets.data);
-      };
+    }, [storyId]);
 
     useEffect(() => {
         fetchSnippets();
-    }, [storyId]);
+    }, [storyId, fetchSnippets]);
 
     const handleCreateSnippet = async (event) => {
         event.preventDefault();
@@ -43,7 +43,7 @@ const EditSnippet = ({ story }) => {
             storyId: storyId,
         };
         await Client.post('/snippets', newSnippet);
-        setSnippets([...snippets, newSnippet]);
+        setSnippets((prevSnippets) => [...prevSnippets, newSnippet]);
         setSnippetHeader("");
         setSnippetContent("");
         setSnippetImage("");
