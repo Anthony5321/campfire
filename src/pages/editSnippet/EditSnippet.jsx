@@ -9,17 +9,27 @@ const EditSnippet = ({ story }) => {
     const [snippetHeader, setSnippetHeader] = useState("");
     const [snippetContent, setSnippetContent] = useState("");
     const [snippetImage, setSnippetImage] = useState("");
-    const [parentSnippetId, setparentSnippetId] = useState("");
+    const [parentSnippetId, setParentSnippetId] = useState("");
     const [selectedSnippet, setSelectedSnippet] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const initialState = {
+        header: '',
+        content: '',
+        image: '',
+        parentId: ''
+      }
+
+      const fetchSnippets = async () => {
+        console.log(storyId);
+        const snippets = await Client.get(`/snippets/story/${storyId}`);
+        snippets.data.sort((a, b) => {
+          return new Date(b.updatedAt) - new Date(a.updatedAt);
+        });
+        setSnippets(snippets.data);
+      };
 
     useEffect(() => {
-        async function fetchSnippets() {
-            console.log(storyId);
-            const snippets = await Client.get(`/snippets/story/${storyId}`);
-            setSnippets(snippets.data);
-        }
         fetchSnippets();
     }, [storyId]);
 
@@ -37,8 +47,9 @@ const EditSnippet = ({ story }) => {
         setSnippetHeader("");
         setSnippetContent("");
         setSnippetImage("");
-        setparentSnippetId("");
+        setParentSnippetId("");
         setIsSubmitting(false);
+        fetchSnippets();
     };
 
     const handleEditSnippet = (snippet) => {
@@ -46,7 +57,7 @@ const EditSnippet = ({ story }) => {
         setSnippetHeader(snippet.header);
         setSnippetContent(snippet.content);
         setSnippetImage(snippet.image);
-        setparentSnippetId(snippet.parentId);
+        setParentSnippetId(snippet.parentId);
         setIsEditing(true);
     };
 
@@ -68,15 +79,24 @@ const EditSnippet = ({ story }) => {
         setSnippetHeader("");
         setSnippetContent("");
         setSnippetImage("");
-        setparentSnippetId("");
+        setParentSnippetId("");
         setIsEditing(false);
         setIsSubmitting(false);
     };
 
+    const handleCancelEdit = () => {
+        setSelectedSnippet(null);
+        setSnippetHeader(initialState.header);
+        setSnippetContent(initialState.content);
+        setSnippetImage(initialState.image);
+        setParentSnippetId(initialState.parentId);
+        setIsEditing(false);
+      };
+
     const handleDeleteSnippet = async (snippet) => {
         console.log(snippet);
         await Client.delete(`/snippets/${snippet.id}`);
-        setSnippets(snippets.filter(s => s.id !== snippet.id));
+        fetchSnippets();
     };
 
     return (
@@ -126,7 +146,7 @@ const EditSnippet = ({ story }) => {
                         <br />
                         <label className="snippet-page__label">
                             Parent:
-                            <select onChange={(e) => setparentSnippetId(e.target.value)} className="snippet-page__select">
+                            <select onChange={(e) => setParentSnippetId(e.target.value)} className="snippet-page__select">
                                 {snippets.map((snippet) => (
                                     <option key={snippet.id} value={snippet.id} >
                                         {snippet.header}
@@ -136,7 +156,7 @@ const EditSnippet = ({ story }) => {
                         </label>
                         <br />
                         <button type="submit" disabled={isSubmitting} className="snippet-page__button">Update</button>
-                        <button onClick={() => setIsEditing(false)} className="snippet-page__button">Cancel</button>
+                        <button onClick={() => handleCancelEdit} className="snippet-page__button">Cancel</button>
                     </form>
                 </div>
             )}
