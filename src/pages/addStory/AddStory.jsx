@@ -180,7 +180,7 @@ const AddStory = () => {
       <br />
       <br />
       <br />
-      <Link to={`/your-stories`} /><button className="all-done">All done</button><Link />
+      <Link to={`/your-stories`}><button className="all-done">All done</button></Link>
     </div>
   );
 };
