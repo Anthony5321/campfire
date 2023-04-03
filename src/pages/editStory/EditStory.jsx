@@ -61,7 +61,7 @@ const EditStory = () => {
   };
 
   const handleSnippetEdit = (storyId) => {
-    window.location.href = `/stories/${storyId}/add-edit-snippet`;
+    navigate(`/stories/${storyId}/add-edit-snippet`);
   };
 
   const deleteStory = async () => {

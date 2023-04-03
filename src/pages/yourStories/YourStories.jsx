@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import './YourStories.css';
 import Client from '../../services/api';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // import StoryList from '../../components/storyList';
 
 const YourStories = () => {
     const [stories, setStories] = useState([]);
     // const [selectedStoryId, setSelectedStoryId] = useState(null);
     // const { id } = useParams();
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchUserStories = async () => {
@@ -28,7 +29,7 @@ const YourStories = () => {
     }, []);
 
     const handleReadClick = (storyId) => {
-        window.location.href = `/stories/${storyId}`;
+        navigate(`/stories/${storyId}`);
     };
 
     return (
