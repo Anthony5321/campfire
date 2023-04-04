@@ -14,7 +14,6 @@ const ReadBook = () => {
     try {
       const res = await Client.get(`/snippets/story/${storyId}`);
       if (res.data && res.data.length > 0) {
-        console.log(`getAllSnippets res.data:`, res.data);
         return res.data;
       } else {
         console.log("No data found");
@@ -30,10 +29,8 @@ const ReadBook = () => {
     try {
       const res = await Client.get(`/snippets/snippet/${snippetId}`);
       if (res.data && res.data.length > 0 && res.data[0].children) {
-        console.log(`getChildSnippets res.data[0].children:`, res.data[0].children);
         return res.data[0].children;
       } else {
-        console.log(`No children found for snippet ${snippetId}`);
         return [];
       }
     } catch (err) {
@@ -46,7 +43,6 @@ const ReadBook = () => {
     try {
       const snippets = await getAllSnippets(storyId);
       if (snippets && snippets.length > 0) {
-        console.log(`GetSnippet snippets:`, snippets);
         // Find the snippet with the specified ID
         const snippet = snippets.find(snippet => snippet.id === snippetId);
         setSnippet(snippet);
@@ -66,7 +62,6 @@ const ReadBook = () => {
         setIsLoading(true);
         const snippets = await getAllSnippets(storyId);
         if (snippets && snippets.length > 0) {
-          console.log(`setFirstSnippet snippets:`, snippets);
           const firstSnippet = snippets.sort((a, b) => a.createdAt.localeCompare(b.createdAt))[0];
           setSnippet(firstSnippet);
           const children = await getChildSnippets(firstSnippet.id);
@@ -84,11 +79,9 @@ const ReadBook = () => {
   }, [storyId]);
 
   useEffect(() => {
-    console.log(`snippet:`, snippet);
   }, [snippet]);
 
   useEffect(() => {
-    console.log(`allSnippets:`, allSnippets);
   }, [allSnippets]);
 
   return (

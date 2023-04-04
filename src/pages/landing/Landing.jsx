@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import './Landing.css'
-// import landing from '../../imgs/landing_pic.jpg'
 import LoginForm from './LoginForm'
 import Register from './Register'
 

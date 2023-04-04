@@ -12,12 +12,10 @@ const YourStories = () => {
             try {
                 const token = localStorage.getItem('token');
                 const user = localStorage.getItem('user_id');
-                console.log(user);
                 const res = await Client.get(`users/get/stories/${user}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setStories(res.data);
-                console.log(res.data);
             } catch (err) {
                 console.error(err);
             }

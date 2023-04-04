@@ -97,10 +97,6 @@ const AddStory = () => {
     setSnippet({ ...snippet, [event.target.name]: event.target.value });
   };
 
-  // const addSnippet = () => {
-  //   setSnippet({}); // reset the snippet form
-  // };
-
   const handleDeleteSnippet = async (snippet) => {
     await Client.delete(`/snippets/${snippet.id}`);
     setSnippets(snippets.filter(s => s.id !== snippet.id));
