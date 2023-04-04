@@ -8,6 +8,7 @@ const ReadBook = () => {
   let { id: storyId } = useParams();
   const [snippet, setSnippet] = useState({});
   const [allSnippets, setAllSnippets] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getAllSnippets = async (storyId) => {
     try {
@@ -62,6 +63,7 @@ const ReadBook = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const snippets = await getAllSnippets(storyId);
         if (snippets && snippets.length > 0) {
           console.log(`setFirstSnippet snippets:`, snippets);
@@ -74,6 +76,8 @@ const ReadBook = () => {
         }
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchData();
@@ -89,10 +93,14 @@ const ReadBook = () => {
 
   return (
     <div className="readBook-container">
-      {snippet && (
+           {isLoading ? (
+        <h1>Loading...</h1>
+      ) : (
         <>
           <img src={snippet.image} alt="" className="readBook-image" />
-          <p className="readBook-content">{snippet.content}</p>
+        <h2>{snippet.header}</h2>
+        <h2>{snippet.id}</h2>
+        {snippet && <p className="readBook-content" dangerouslySetInnerHTML={{ __html: snippet.content ? snippet.content.replace(/\n/g, '<br />') : '' }}></p>}
           {allSnippets && allSnippets.length > 0 && (
             <div className="readBook-buttons">
               {allSnippets.map((child) => (
