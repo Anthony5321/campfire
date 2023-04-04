@@ -70,7 +70,9 @@ const EditSnippet = ({ story }) => {
             header: snippetHeader,
             content: snippetContent,
             image: snippetImage,
+            parentId: parentSnippetId,
         };
+        console.log(updatedSnippet);
         await Client.put(`/snippets/${selectedSnippet.id}`, updatedSnippet);
         const relation = { parentSnippetId: parentSnippetId, childSnippetId: selectedSnippet.id }
         await Client.post(`/snippets/children`, relation)
