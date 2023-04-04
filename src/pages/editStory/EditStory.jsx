@@ -22,12 +22,12 @@ const EditStory = () => {
   const storyInfo = locate.state;
 
   console.log(user);
-  console.log(storyInfo);
+  console.log(storyInfo.storyInfo);
 
   const initialState = {
     authorId: `${user}`,
-    title: ``,
-    image: ``,
+    title: storyInfo.storyInfo.title,
+    image: storyInfo.storyInfo.image,
     likes: 0,
   };
 

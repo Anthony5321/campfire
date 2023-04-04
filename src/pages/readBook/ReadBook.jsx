@@ -65,7 +65,7 @@ const ReadBook = () => {
         const snippets = await getAllSnippets(storyId);
         if (snippets && snippets.length > 0) {
           console.log(`setFirstSnippet snippets:`, snippets);
-          const firstSnippet = snippets[0];
+          const firstSnippet = snippets.sort((a, b) => a.createdAt.localeCompare(b.createdAt))[0];
           setSnippet(firstSnippet);
           const children = await getChildSnippets(firstSnippet.id);
           setAllSnippets(children);
