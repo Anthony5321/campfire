@@ -5,7 +5,6 @@ const Register = ({ toggleForm }) => {
 
     const RegisterUser = async (data) => {
         try {
-            console.log(data)
             const res = await Client.post('/users/register', data)
             return res.data
         } catch (error) {
@@ -28,7 +27,6 @@ const Register = ({ toggleForm }) => {
     const onSubmit = async (e) => {
         e.preventDefault()
         setFormValues(initialState)
-        console.log('hi');
         await RegisterUser(formValues)
         await checkUser(formValues)
     }

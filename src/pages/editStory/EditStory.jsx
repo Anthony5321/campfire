@@ -21,9 +21,6 @@ const EditStory = () => {
   const locate = useLocation();
   const storyInfo = locate.state;
 
-  console.log(user);
-  console.log(storyInfo.storyInfo);
-
   const initialState = {
     authorId: `${user}`,
     title: storyInfo.storyInfo.title,
@@ -44,7 +41,6 @@ const EditStory = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setStory(res.data);
-      console.log(res.data);
     } catch (err) {
       console.error(err);
     }
@@ -65,7 +61,6 @@ const EditStory = () => {
   };
 
   const deleteStory = async () => {
-    console.log(storyInfo);
     await Client.delete(`/stories/${story.id}`);
     navigate('/your-stories');
   };

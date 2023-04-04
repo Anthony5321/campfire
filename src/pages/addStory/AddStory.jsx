@@ -22,12 +22,10 @@ const AddStory = () => {
       try {
         const token = localStorage.getItem("token");
         const user = localStorage.getItem("user_id");
-        console.log(user);
         const res = await Client.get(`users/get/${user}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(res.data);
-        console.log(res.data);
       } catch (err) {
         console.error(err);
       }
@@ -57,13 +55,11 @@ const AddStory = () => {
   const handleSubmitStory = async (event) => {
     event.preventDefault();
     try {
-      console.log(user.username);
       const res = await Client.post("/stories", {
         ...story,
         authorId: user.id,
         likes: 0,
       });
-      console.log(res.data);
       setStory(res.data);
     } catch (err) {
       console.error(err);
@@ -74,12 +70,10 @@ const AddStory = () => {
     event.preventDefault();
     try {
       formRef.current.reset();
-      console.log(snippet);
       const res = await Client.post("/snippets", {
         ...snippet,
         storyId: story.id,
       });
-      console.log(res.data);
       setSnippets([...snippets, res.data]);
       setSnippet(initialState); // reset the snippet form
 
@@ -89,7 +83,6 @@ const AddStory = () => {
           parentSnippetId: parentSnippets,
           childSnippetId: res.data.id
         });
-        console.log(response.data);
       }
     } catch (err) {
       console.error(err);
@@ -109,12 +102,9 @@ const AddStory = () => {
   // };
 
   const handleDeleteSnippet = async (snippet) => {
-    console.log(snippet);
     await Client.delete(`/snippets/${snippet.id}`);
     setSnippets(snippets.filter(s => s.id !== snippet.id));
   };
-
-  console.log(story.id);
 
   return (
     <div className="wrapper">

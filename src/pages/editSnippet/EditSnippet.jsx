@@ -21,7 +21,6 @@ const EditSnippet = ({ story }) => {
     };
 
     const fetchSnippets = useCallback(async () => {
-        console.log(storyId);
         const snippets = await Client.get(`/snippets/story/${storyId}`);
         snippets.data.sort((a, b) => {
           return new Date(b.updatedAt) - new Date(a.updatedAt);
@@ -72,7 +71,6 @@ const EditSnippet = ({ story }) => {
             image: snippetImage,
             parentId: parentSnippetId,
         };
-        console.log(updatedSnippet);
         await Client.put(`/snippets/${selectedSnippet.id}`, updatedSnippet);
         const relation = { parentSnippetId: parentSnippetId, childSnippetId: selectedSnippet.id }
         await Client.post(`/snippets/children`, relation)
@@ -96,7 +94,6 @@ const EditSnippet = ({ story }) => {
       };
 
     const handleDeleteSnippet = async (snippet) => {
-        console.log(snippet);
         await Client.delete(`/snippets/${snippet.id}`);
         fetchSnippets();
     };

@@ -20,6 +20,14 @@
     margin-bottom: 5px;
 }
 
+.story-info__image {
+    width: 100%;
+    max-width: 390px;
+    height: auto;
+    display: block;
+    margin: 20px 0;
+  }
+
 .story-info__author {
     margin-bottom: 5px;
 }

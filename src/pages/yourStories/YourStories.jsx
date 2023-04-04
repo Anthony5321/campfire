@@ -2,12 +2,9 @@ import { useState, useEffect } from 'react';
 import './YourStories.css';
 import Client from '../../services/api';
 import { Link, useNavigate } from 'react-router-dom';
-// import StoryList from '../../components/storyList';
 
 const YourStories = () => {
     const [stories, setStories] = useState([]);
-    // const [selectedStoryId, setSelectedStoryId] = useState(null);
-    // const { id } = useParams();
     const navigate = useNavigate()
 
     useEffect(() => {

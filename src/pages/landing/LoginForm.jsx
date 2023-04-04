@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import Client from '../../services/api'
 
 const LoginForm = ({ toggleForm, setUser }) => {
-    // const [failedLogin, setFailedLogin] = useState(false)
     let navigate = useNavigate()
 
     const loginUser = async (data) => {
@@ -37,7 +36,6 @@ const LoginForm = ({ toggleForm, setUser }) => {
         setFormValues(initialState)
         setUser(payload)
         navigate('/home')
-        // setFailedLogin(true)
     }
 
     return (
