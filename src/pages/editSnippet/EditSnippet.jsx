@@ -23,7 +23,7 @@ const EditSnippet = ({ story }) => {
     const fetchSnippets = useCallback(async () => {
         const snippets = await Client.get(`/snippets/story/${storyId}`);
         snippets.data.sort((a, b) => {
-          return new Date(b.updatedAt) - new Date(a.updatedAt);
+            return new Date(b.updatedAt) - new Date(a.updatedAt);
         });
         setSnippets(snippets.data);
     }, [storyId]);
@@ -91,7 +91,7 @@ const EditSnippet = ({ story }) => {
         setSnippetImage(initialState.image);
         setParentSnippetId(initialState.parentId);
         setIsEditing(false);
-      };
+    };
 
     const handleDeleteSnippet = async (snippet) => {
         await Client.delete(`/snippets/${snippet.id}`);

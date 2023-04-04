@@ -80,7 +80,6 @@ const StoryList = () => {
         setIsEditingItem(false); // reset flag after cancelling snippet
     };
 
-
     const isEditingStory = !!selectedStory;
 
     return (
@@ -93,7 +92,6 @@ const StoryList = () => {
                         <h2>Title: {story.title}</h2>
                         <img src={story.image} alt={story.title} />
                         <button disabled={isEditingItem && !isCurrentStoryEditing} onClick={() =>
-
                             handleEditStory(story)}>
                             Edit Story
                         </button>

@@ -23,7 +23,7 @@ const BookCard = (props) => {
   return (
     <div onClick={props.onClick} className="book-card">
       <div>
-        <img src={props.image} alt=''/>
+        <img src={props.image} alt='' />
       </div>
       <div className="book-card-info">
         <h5>{props.title}</h5>
