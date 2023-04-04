@@ -9,7 +9,6 @@ const BookCard = (props) => {
   const GetUser = useCallback(async () => {
     try {
       const res = await Client.get(`/users/get/${author}`);
-      console.log(res.data);
       setUserName(res.data.username);
     } catch (error) {
       throw error;
