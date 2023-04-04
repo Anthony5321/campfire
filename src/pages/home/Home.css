@@ -1,6 +1,6 @@
 .home-ctn {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, .18fr));
   gap: 20px;
   padding: 20px;
 }
@@ -8,6 +8,7 @@
 .book-card-info {
   text-decoration: none;
 }
+
 
 .book-card {
   max-width: 300px;
