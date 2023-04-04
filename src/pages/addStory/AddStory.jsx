@@ -83,6 +83,7 @@ const AddStory = () => {
           parentSnippetId: parentSnippets,
           childSnippetId: res.data.id
         });
+        setParentSnippets([...parentSnippets, response.data]);
       }
     } catch (err) {
       console.error(err);

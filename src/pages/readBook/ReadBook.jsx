@@ -92,7 +92,7 @@ const ReadBook = () => {
         <>
           <img src={snippet.image} alt="" className="readBook-image" />
           <h2>{snippet.header}</h2>
-          <h2>{snippet.id}</h2>
+          {/* <h2>{snippet.id}</h2> */}
           {snippet && <p className="readBook-content" dangerouslySetInnerHTML={{ __html: snippet.content ? snippet.content.replace(/\n/g, '<br />') : '' }}></p>}
           {allSnippets && allSnippets.length > 0 && (
             <div className="readBook-buttons">
