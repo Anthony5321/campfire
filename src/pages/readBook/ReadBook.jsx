@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import './ReadBook.css';
 import { Link } from 'react-router-dom';
 import Client from '../../services/api';
+import Nav from '../../components/Nav'
 
 const ReadBook = () => {
   let { id: storyId } = useParams();
@@ -85,6 +86,7 @@ const ReadBook = () => {
   }, [allSnippets]);
 
   return (
+    <div><Nav />
     <div className="readBook-container">
       {isLoading ? (
         <h1>Loading...</h1>
@@ -110,6 +112,7 @@ const ReadBook = () => {
           <p>Back to home</p>
         </Link>
       </div>
+    </div>
     </div>
   );
 };

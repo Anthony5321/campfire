@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Client from '../../services/api';
 import { useParams } from 'react-router-dom';
 import './EditSnippet.css'
+import Nav from '../../components/Nav'
 
 const EditSnippet = ({ story }) => {
     const { storyId } = useParams();
@@ -99,6 +100,7 @@ const EditSnippet = ({ story }) => {
     };
 
     return (
+        <div><Nav />
         <div className="snippet-page-container">
             {!isEditing && (
                 <div>
@@ -174,6 +176,7 @@ const EditSnippet = ({ story }) => {
                     </li>
                 ))}
             </ul>
+        </div>
         </div>
     );
 };

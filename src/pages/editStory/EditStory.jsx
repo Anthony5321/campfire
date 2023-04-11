@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import './EditStory.css';
 import Client from '../../services/api';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import Nav from '../../components/Nav'
 
 const EditStory = () => {
   const [story, setStory] = useState(null);
@@ -67,6 +68,7 @@ const EditStory = () => {
 
 
   return (
+    <div><Nav />
     <div className="story-page-container">
       {story ? (
         <div>
@@ -100,6 +102,7 @@ const EditStory = () => {
       ) : (
         <p>Loading...</p>
       )}
+    </div>
     </div>
   );
 };

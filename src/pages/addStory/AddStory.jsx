@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import './AddStory.css';
 import Client from '../../services/api';
 import { Link } from 'react-router-dom';
+import Nav from '../../components/Nav'
 
 const AddStory = () => {
   const [story, setStory] = useState({});
@@ -104,6 +105,7 @@ const AddStory = () => {
   };
 
   return (
+    <div><Nav />
     <div className="wrapper">
       {story.id ? (
         <>
@@ -168,6 +170,7 @@ const AddStory = () => {
       <br />
       <br />
       <Link to={`/your-stories`}><button className="all-done">All done</button></Link>
+    </div>
     </div>
   );
 };

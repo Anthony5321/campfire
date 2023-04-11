@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './YourStories.css';
 import Client from '../../services/api';
 import { Link, useNavigate } from 'react-router-dom';
+import Nav from '../../components/Nav'
 
 const YourStories = () => {
     const [stories, setStories] = useState([]);
@@ -28,6 +29,7 @@ const YourStories = () => {
     };
 
     return (
+        <div><Nav />
         <div className="your-stories-container">
             {stories.map((story) => (
                 <div key={story.id} className="story-card">
@@ -42,6 +44,7 @@ const YourStories = () => {
                     <button className="story-card__button" onClick={() => handleReadClick(story.id)}>Read</button>
                 </div>
             ))}
+        </div>
         </div>
     );
 };

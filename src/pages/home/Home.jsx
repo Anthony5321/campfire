@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Client from '../../services/api';
 import BookCard from '../../components/BookCard';
 import './Home.css';
+import Nav from '../../components/Nav'
 
 const Home = () => {
 
@@ -21,6 +22,7 @@ const Home = () => {
   }, []);
 
   return (
+    <div><Nav />
     <div className="home-ctn">
       {story.map((card) => (
         <Link to={`/stories/${card.id}`} key={card.id}>
@@ -32,6 +34,7 @@ const Home = () => {
           />
         </Link>
       ))}
+    </div>
     </div>
   );
 };
