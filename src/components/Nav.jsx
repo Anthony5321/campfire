@@ -22,6 +22,7 @@ const Nav = () => {
         <Link className='navbar-link' to={"/home"}>Home</Link>
         <Link className='navbar-link' to={"/add/story"}>Create A Story</Link>
         <Link className='navbar-link' to={"/your-stories"}>Your Stories</Link>
+        <Link className='navbar-link' to={"/about"}>About</Link>
       </div>
     </nav>
   )

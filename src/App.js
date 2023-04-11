@@ -9,7 +9,7 @@ import EditStory from './pages/editStory/EditStory';
 import EditSnippet from './pages/editSnippet/EditSnippet';
 import AddStory from './pages/addStory/AddStory';
 import ReadBook from './pages/readBook/ReadBook';
-// import About from './pages/about/About';
+import About from './pages/about/AboutPage';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -48,7 +48,7 @@ function App() {
       <Routes className="Routes">
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home user={user} setUser={setUser} />} />
-        {/* <Route path="/about" element={<About user={user} setUser={setUser} />} /> */}
+        <Route path="/about" element={<About user={user} setUser={setUser} />} />
         <Route
           path="/stories/:id"
           element={<ReadBook story={story} getStories={getStories} user={user} setUser={setUser} />}
