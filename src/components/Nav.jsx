@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import './Nav.css';
 
@@ -12,17 +12,17 @@ const Nav = () => {
   return (
     <nav className='navbar'>
       <h3 className='navbar-title'>Campfire</h3>
-      <div className='navbar-burger' onClick={toggleMenu}>
+      <div className={`navbar-burger ${showMenu ? 'active' : ''} hide-lg`} onClick={toggleMenu}>
         <div className={`navbar-burger-line ${showMenu ? 'active' : ''}`}></div>
         <div className={`navbar-burger-line ${showMenu ? 'active' : ''}`}></div>
         <div className={`navbar-burger-line ${showMenu ? 'active' : ''}`}></div>
         <div className={`navbar-burger-line ${showMenu ? 'active' : ''}`}></div>
       </div>
       <div className={`navbar-links ${showMenu ? 'show' : ''}`}>
-        <Link className='navbar-link' to={"/home"}>Home</Link>
-        <Link className='navbar-link' to={"/add/story"}>Create A Story</Link>
-        <Link className='navbar-link' to={"/your-stories"}>Your Stories</Link>
-        <Link className='navbar-link' to={"/about"}>About</Link>
+        <NavLink className='navbar-link' activeClassName='active' exact to={"/home"}>Home</NavLink>
+        <NavLink className='navbar-link' activeClassName='active' to={"/add/story"}>Create A Story</NavLink>
+        <NavLink className='navbar-link' activeClassName='active' to={"/your-stories"}>Your Stories</NavLink>
+        <NavLink className='navbar-link' activeClassName='active' to={"/about"}>About</NavLink>
       </div>
     </nav>
   )
