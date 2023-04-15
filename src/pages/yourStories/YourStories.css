@@ -1,6 +1,6 @@
 .your-stories-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, .18fr));
   gap: 20px;
   padding: 20px;
   background-color: #f0f0f0;
@@ -48,4 +48,10 @@
 
 .story-card__button:hover {
   background-color: #555;
+}
+
+@media only screen and (max-width: 720px) {
+  .your-stories-container {
+    justify-content: center;
+  }
 }
