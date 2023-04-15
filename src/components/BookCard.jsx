@@ -26,9 +26,9 @@ const BookCard = (props) => {
         <img src={props.image} alt='' />
       </div>
       <div className="book-card-info">
-        <h5>{props.title}</h5>
-        <p>By: {userName}</p>
-        <p>Rating: {props.likes}</p>
+        <h5 className='title'>{props.title}</h5>
+        <p className='author'>By: {userName}</p>
+        <p className='rating'>Rating: {props.likes}</p>
       </div>
     </div>
   )

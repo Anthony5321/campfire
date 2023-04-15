@@ -25,7 +25,7 @@ const Home = () => {
     <div><Nav />
     <div className="home-ctn">
       {story.map((card) => (
-        <Link to={`/stories/${card.id}`} key={card.id}>
+        <Link to={`/stories/${card.id}`} key={card.id} style={{ textDecoration: 'none' }}>
           <BookCard
             title={card?.title}
             image={card?.image}
