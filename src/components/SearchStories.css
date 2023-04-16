@@ -3,15 +3,15 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-  }
-  
-  /* .search-stories-results {
+}
+
+/* .search-stories-results {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   } */
-  
-  .search-stories-result {
+
+.search-stories-result {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,71 +21,71 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     overflow: hidden;
-  }
-  
-  .search-stories-details {
+}
+
+.search-stories-details {
     display: flex;
     flex-direction: column;
     padding: 20px;
     text-align: center;
-  }
+}
 
-  .rating {
+.rating {
     font-size: 1.2rem;
     font-weight: 500;
     margin: 5px 10px;
     text-align: center;
     color: #777;
-  }
+}
 
-  .author {
+.author {
     font-size: 1.0rem;
     font-weight: 500;
     margin: 5px 10px;
     color: #555;
     text-align: center;
-  }
+}
 
-  .title {
+.title {
     font-size: 1.5rem;
     font-weight: bold;
     margin: 10px;
     color: #333;
     text-align: center;
-  }
-  
-  img {
+}
+
+img {
     width: 300px;
     height: 300px;
     object-fit: cover;
-  }
+}
 
-  form {
+form {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 20px 0;
-  }
-  
-  label {
+}
+
+label {
     font-size: 1.2rem;
     font-weight: bold;
     margin-right: 10px;
-  }
-  
-  input[type="text"] {
+}
+
+input[type="text"] {
     padding-top: 4px;
     padding-bottom: 4px;
     font-size: 1.5rem;
     border: 2px solid #555;
     outline: none;
-  }
-  
-  input[type="text"]:focus {
+}
+
+input[type="text"]:focus {
     border-color: #333;
-  }
-  
-  button[type="submit"] {
+}
+
+button[type="submit"] {
     padding: 10px;
     font-size: 1rem;
     font-weight: bold;
@@ -95,8 +95,8 @@
 
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-  }
-  
-  button[type="submit"]:hover {
+}
+
+button[type="submit"]:hover {
     background-color: #333;
-  }
+}

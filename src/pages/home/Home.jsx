@@ -24,19 +24,19 @@ const Home = () => {
 
   return (
     <div><Nav />
-    <SearchStories />
-    <div className="home-ctn">
-      {story.map((card) => (
-        <Link to={`/stories/${card.id}`} key={card.id} style={{ textDecoration: 'none' }}>
-          <BookCard
-            title={card?.title}
-            image={card?.image}
-            authorId={card?.authorId}
-            likes={card?.likes}
-          />
-        </Link>
-      ))}
-    </div>
+      <SearchStories />
+      <div className="home-ctn">
+        {story.map((card) => (
+          <Link to={`/stories/${card.id}`} key={card.id} style={{ textDecoration: 'none' }}>
+            <BookCard
+              title={card?.title}
+              image={card?.image}
+              authorId={card?.authorId}
+              likes={card?.likes}
+            />
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

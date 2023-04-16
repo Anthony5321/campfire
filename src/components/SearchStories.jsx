@@ -10,9 +10,7 @@ const SearchStories = () => {
     const handleSearch = async (event) => {
         event.preventDefault();
         const title = event.target.elements.title.value;
-        console.log(title);
         const response = await Client.get(`/stories/search/${title}?title=${title}`);
-        console.log(response);
         setResults(response.data.stories);
     };
 
