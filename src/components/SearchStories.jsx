@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Client from '../services/api';
 import './SearchStories.css';
+import { BsSearch } from 'react-icons/bs';
 
 const SearchStories = () => {
     const [results, setResults] = useState([]);
@@ -32,19 +33,19 @@ const SearchStories = () => {
     return (
         <div className="search-stories-container">
             <form onSubmit={handleSearch}>
-                <label htmlFor="title">Search stories:</label>
                 <input type="text" id="title" name="title" />
-                <button type="submit">Search</button>
+                <button type="submit"><BsSearch /></button>
             </form>
             <div className="search-stories-results">
                 {results.map((story) => (
                     <div key={story.id} className="search-stories-result">
                         <div>
-                            <img src={story.image} alt='' className="search-stories-image" />
+                            <img src={story.image} alt='' className="image" />
                         </div>
-                        <div className="search-stories-details">
-                            <h2 className="search-stories-title">{story.title}</h2>
-                            <p className="search-stories-author">By: {usernames[story.authorId]}</p>
+                        <div className="details">
+                            <h2 className="title">{story.title}</h2>
+                            <p className="author">By: {usernames[story.authorId]}</p>
+                            <p className='rating'>Rating: {story.likes}</p>
                         </div>
                     </div>
                 ))}
