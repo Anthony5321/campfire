@@ -17,7 +17,7 @@
 .story-info__title {
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 }
 
 .story-info__image {
@@ -25,7 +25,7 @@
     max-width: 390px;
     height: auto;
     display: block;
-    margin: 20px 0;
+    margin: auto;
 }
 
 .story-info__author {
@@ -69,6 +69,7 @@
 }
 
 .form-button {
+    margin-top: 30px;
     background-color: #333;
     color: #fff;
     padding: 10px;
@@ -76,6 +77,8 @@
     border: none;
     cursor: pointer;
     font-weight: bold;
+    width: 300px;
+    align-self: center;
 }
 
 .form-button:hover {
@@ -86,6 +89,7 @@
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
+    align-self: center;
 }
 
 .edit-snippets__link {
@@ -112,7 +116,7 @@
 }
 
 .snippet-item {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .snippet-header {
@@ -130,14 +134,16 @@
 .snippet-header__delete-button {
     background-color: #cc0000;
     color: #fff;
-    padding: 5px;
+    padding: 7px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
+    font-size: large;
 }
 
 .snippet-header__delete-button:hover {
     background-color: #990000;
+    color: black
 }
 
 .snippet-content {

@@ -74,9 +74,10 @@ label {
 }
 
 input[type="text"] {
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding-top: 9px;
+    padding-bottom: 9px;
     font-size: 1.5rem;
+    width: 60vw;
     border: 2px solid #555;
     outline: none;
 }
@@ -86,13 +87,15 @@ input[type="text"]:focus {
 }
 
 button[type="submit"] {
-    padding: 10px;
-    font-size: 1rem;
+    padding: 8px;
+    font-size: 2rem;
     font-weight: bold;
     background-color: #555;
     color: #fff;
     border: none;
-
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 50px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }

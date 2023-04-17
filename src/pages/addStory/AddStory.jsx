@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import './AddStory.css';
 import Client from '../../services/api';
 import { Link } from 'react-router-dom';
-import Nav from '../../components/Nav'
+import Nav from '../../components/Nav';
+import { FaTrash } from 'react-icons/fa';
 
 const AddStory = () => {
   const [story, setStory] = useState({});
@@ -111,11 +112,10 @@ const AddStory = () => {
         <>
           <h2 className="story-info-heading">Story Info:</h2>
           <div className="story-info">
-            <p className="story-info__title">Title: {story.title}</p>
+            <p className="story-info__title">{story.title}</p>
             <img src={story.image} alt={story.title} className="story-info__image" />
           </div>
           <form ref={formRef} className="snippet-form" onSubmit={handleSubmitSnippet}>
-            <h2 className="add-snippet-heading">Add a Snippet:</h2>
             <div className="form-fields">
               <label htmlFor="header" className="form-label">Header:</label>
               <input type="text" id="header" name="header" className="form-input" onChange={handleChangeSnippet} />
@@ -145,7 +145,7 @@ const AddStory = () => {
                 <div className="snippet-header">
                   <p className="snippet-header__text">Header: {snippet.header}</p>
                   <button onClick={() =>
-                    handleDeleteSnippet(snippet)} className="snippet-header__delete-button">Delete</button>
+                    handleDeleteSnippet(snippet)} className="snippet-header__delete-button"><FaTrash /></button>
                 </div>
                 <p className="snippet-content">Content: {snippet.content}</p>
               </li>

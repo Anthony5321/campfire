@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Client from '../services/api';
 import './SearchStories.css';
 import { BsSearch } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 const SearchStories = () => {
     const [results, setResults] = useState([]);
@@ -36,16 +37,18 @@ const SearchStories = () => {
             </form>
             <div className="search-stories-results">
                 {results.map((story) => (
-                    <div key={story.id} className="search-stories-result">
-                        <div>
-                            <img src={story.image} alt='' className="image" />
+                    <Link to={`/stories/${story.id}`} key={story.id} style={{ textDecoration: 'none' }}>
+                        <div key={story.id} className="search-stories-result">
+                            <div>
+                                <img src={story.image} alt='' className="image" />
+                            </div>
+                            <div className="details">
+                                <h2 className="title">{story.title}</h2>
+                                <p className="author">By: {usernames[story.authorId]}</p>
+                                <p className='rating'>Rating: {story.likes}</p>
+                            </div>
                         </div>
-                        <div className="details">
-                            <h2 className="title">{story.title}</h2>
-                            <p className="author">By: {usernames[story.authorId]}</p>
-                            <p className='rating'>Rating: {story.likes}</p>
-                        </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>
