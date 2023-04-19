@@ -32,7 +32,7 @@ const SearchStories = () => {
     return (
         <div className="search-stories-container">
             <form onSubmit={handleSearch}>
-                <input type="text" id="title" name="title" />
+                <input type="text" id="title" name="title" placeholder='Search your favorite book'/>
                 <button type="submit"><BsSearch /></button>
             </form>
             <div className="search-stories-results">

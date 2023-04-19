@@ -11,7 +11,9 @@ const Nav = () => {
 
   return (
     <nav className='navbar'>
-      <NavLink className='navbar-title' activeClassName='active' exact to={"/home"}>Campfire</NavLink>
+      <NavLink className='navbar-title' activeClassName='active' exact to={"/home"}>
+        Campfire
+      </NavLink>
       <div className={`navbar-burger ${showMenu ? 'active' : ''} hide-lg`} onClick={toggleMenu}>
         <div className={`navbar-burger-line ${showMenu ? 'active' : ''}`}></div>
         <div className={`navbar-burger-line ${showMenu ? 'active' : ''}`}></div>
