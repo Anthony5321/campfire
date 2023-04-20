@@ -31,9 +31,9 @@ const SearchStories = () => {
 
     return (
         <div className="search-stories-container">
-            <form onSubmit={handleSearch}>
-                <input type="text" id="title" name="title" placeholder='Search your favorite book'/>
-                <button type="submit"><BsSearch /></button>
+            <form onSubmit={handleSearch} className='search-form'>
+                <input className="search-input" type="text" id="title" name="title" placeholder='Search your favorite book'/>
+                <button className="search-button" type="submit"><BsSearch /></button>
             </form>
             <div className="search-stories-results">
                 {results.map((story) => (

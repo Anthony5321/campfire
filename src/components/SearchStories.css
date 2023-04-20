@@ -5,62 +5,57 @@
     padding: 20px;
 }
 
-/* .search-stories-results {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  } */
-
 .search-stories-result {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px;
-    width: 300px;
+    max-width: 300px;
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
     overflow: hidden;
-}
-
-.search-stories-details {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    text-align: center;
-}
-
-.rating {
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin: 5px 10px;
-    text-align: center;
-    color: #777;
-}
-
-.author {
-    font-size: 1.0rem;
-    font-weight: 500;
-    margin: 5px 10px;
-    color: #555;
-    text-align: center;
-}
-
-.title {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .search-stories-result:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+  }
+  
+  .search-stories-result img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  
+  .search-stories-result .title {
     font-size: 1.5rem;
     font-weight: bold;
     margin: 10px;
     color: #333;
     text-align: center;
-}
+  }
+  
+  .search-stories-result .author {
+    font-size: 1.0rem;
+    font-weight: 500;
+    margin: 5px 10px;
+    color: #555;
+    text-align: center;
+  }
+  
+  .search-stories-result .rating {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 5px 10px;
+    text-align: center;
+    color: #777;
+  }
+  
+  .search-stories-result .rating svg {
+    fill: #f7c948;
+    margin-right: 5px;
+    text-decoration: underline;
+  }
 
-img {
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-}
-
-form {
+.search-form {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,7 +68,7 @@ label {
     margin-right: 10px;
 }
 
-input[type="text"] {
+.search-input {
     padding-top: 9px;
     padding-bottom: 9px;
     font-size: 1.5rem;
@@ -82,11 +77,11 @@ input[type="text"] {
     outline: none;
 }
 
-input[type="text"]:focus {
+.search-input:focus {
     border-color: #333;
 }
 
-button[type="submit"] {
+.search-button {
     padding: 8px;
     font-size: 2rem;
     font-weight: bold;
@@ -100,6 +95,6 @@ button[type="submit"] {
     transition: all 0.3s ease-in-out;
 }
 
-button[type="submit"]:hover {
+.search-button:hover {
     background-color: #333;
 }
